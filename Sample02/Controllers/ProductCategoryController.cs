@@ -95,7 +95,7 @@ namespace Sample02.Controllers
             {
                 return HttpNotFound();
             }
-            return View(Ref_ProductCategoryViewModel.GetRecord(id));
+            return View(Ref_ProductCategoryViewModel);
         }
         #endregion
 
