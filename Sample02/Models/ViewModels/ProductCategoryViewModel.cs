@@ -14,8 +14,16 @@ namespace Sample02.Models.ViewModels
         }
         #endregion
 
+        #region [-props for class-]
         public Models.DomainModels.DTO.EF.ProductCategory Ref_ProductCateory { get; set; }
         public Models.DomainModels.POCO.ProductCategoryCrud Ref_ProductCategoryCrud { get; set; }
+        #endregion
+
+        #region [-props for Model-]
+        public int CategoryCode { get; set; }
+        public string CategoryName { get; set; }
+        public int Id { get; set; } 
+        #endregion
 
         #region [- Save(string categoryName) -]
         public void Save(int categoryCode,string categoryName)
@@ -29,7 +37,7 @@ namespace Sample02.Models.ViewModels
         #endregion
 
         #region [-dynamic FillGrid()-]
-        public dynamic FillGrid() //goftim dynamic k moshkele view dar refresh hal shavad va lazem nist list bargardanad
+        public List<Models.DomainModels.DTO.EF.ProductCategory> FillGrid() 
         {
             return Ref_ProductCategoryCrud.SelectAll();
         }
