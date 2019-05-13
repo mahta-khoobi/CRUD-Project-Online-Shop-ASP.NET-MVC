@@ -61,7 +61,7 @@ namespace Sample02.Controllers
         {
             if (id == null)
             {
-                //return RedirectToAction("index");
+               // return RedirectToAction("index");
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             if (Ref_ProductCategoryViewModel.GetRecord(id) == null)
@@ -69,7 +69,7 @@ namespace Sample02.Controllers
                 return HttpNotFound();
             }
 
-            return View(Ref_ProductCategoryViewModel.GetRecord(id));
+            return View(Ref_ProductCategoryViewModel);
 
         }
         #endregion
