@@ -20,17 +20,16 @@ namespace Sample02.Controllers
         #region [-Properties-]
         public Models.ViewModels.ProductCategoryViewModel Ref_ProductCategoryViewModel { get; set; } 
         #endregion
+
         #region [-Actions-]
 
         // GET: ProductCategory
         #region [-Index()-]
         public ActionResult Index()
         {
-            return View(Ref_ProductCategoryViewModel.FillGrid());
+            //return View(Ref_ProductCategoryViewModel.FillGrid());
+            return View(Ref_ProductCategoryViewModel);
         }
-        #endregion
-
-
         #endregion
 
         #region [- Create()  -]
@@ -43,11 +42,16 @@ namespace Sample02.Controllers
 
         #region [- Create() :Post -]
         [HttpPost]
-        public ActionResult Create(int CatrgoryCode, string CategoryName)
+        public ActionResult Create([Bind(Include = "Id,CategoryCode,CategoryName")] Models.DomainModels.DTO.EF.ProductCategory productCategory)
         {
-            Ref_ProductCategoryViewModel.Save(CatrgoryCode, CategoryName);
+            if (ModelState.IsValid)
+            {
+                Ref_ProductCategoryViewModel.Save(productCategory.CategoryCode, productCategory.CategoryName);
 
-            return RedirectToAction("Index");
+                return RedirectToAction("Index");
+            }
+
+            return View(productCategory);
         }
 
         #endregion
@@ -64,17 +68,17 @@ namespace Sample02.Controllers
             {
                 return HttpNotFound();
             }
-            
-                return View(Ref_ProductCategoryViewModel.GetRecord(id));
-            
+
+            return View(Ref_ProductCategoryViewModel.GetRecord(id));
+
         }
         #endregion
 
         #region [- Edit() :Post -]
         [HttpPost]
-        public ActionResult Edit(int id,int categoryCode,string categoryName )
+        public ActionResult Edit(int id, int categoryCode, string categoryName)
         {
-            Ref_ProductCategoryViewModel.Edit(id,categoryCode,categoryName);
+            Ref_ProductCategoryViewModel.Edit(id, categoryCode, categoryName);
             return RedirectToAction("Index");
         }
         #endregion
@@ -105,6 +109,10 @@ namespace Sample02.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+        #endregion
+
+
 
     }
 }
