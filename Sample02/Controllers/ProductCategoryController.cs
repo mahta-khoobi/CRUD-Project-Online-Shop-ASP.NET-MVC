@@ -76,9 +76,9 @@ namespace Sample02.Controllers
 
         #region [- Edit() :Post -]
         [HttpPost]
-        public ActionResult Edit(int id, int categoryCode, string categoryName)
+        public ActionResult Edit([Bind(Include = "Id,CategoryCode,CategoryName")] Models.DomainModels.DTO.EF.ProductCategory productCategory)
         {
-            Ref_ProductCategoryViewModel.Edit(id, categoryCode, categoryName);
+            Ref_ProductCategoryViewModel.Edit(productCategory.Id, productCategory.CategoryCode, productCategory.CategoryName);
             return RedirectToAction("Index");
         }
         #endregion
