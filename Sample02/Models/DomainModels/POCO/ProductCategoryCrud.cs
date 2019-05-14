@@ -16,35 +16,6 @@ namespace Sample02.Models.DomainModels.POCO
 
         }
         #endregion
-        #region [-Insert(DomainModels.DTO.EF.ProductCategory ref_ProductCategory)-]
-        public void Insert(DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
-        {
-            using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
-            {
-                try
-                {
-
-                    context.ProductCategory.Add(ref_ProductCategory);
-                    context.SaveChanges();
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-                finally
-                {
-                    if (context != null)
-                    {
-                        context.Dispose();
-                    }
-
-                }
-            }
-        }
-        #endregion
-
-        //other way is using list
         #region [-SelectAll()-]
         public List<Models.DomainModels.DTO.EF.ProductCategory> SelectAll()
         {
@@ -68,6 +39,34 @@ namespace Sample02.Models.DomainModels.POCO
                 }
             }
 
+        }
+        #endregion
+
+        #region [-Insert(DomainModels.DTO.EF.ProductCategory ref_ProductCategory)-]
+        public void Insert(DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
+        {
+            using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
+            {
+                try
+                {
+
+                    context.usp_ProductCategory_Insert(ref_ProductCategory.CategoryCode, ref_ProductCategory.CategoryName);
+                    context.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    if (context != null)
+                    {
+                        context.Dispose();
+                    }
+
+                }
+            }
         }
         #endregion
 
