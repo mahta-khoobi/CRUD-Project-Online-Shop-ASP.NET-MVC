@@ -53,7 +53,7 @@ namespace Sample02.Models.DomainModels.POCO
 
                 try
                 {
-                    var q = context.ProductCategory.ToList();
+                    var q = context.usp_ProductCategory_Select().ToList();
 
                     return q;
                 }
