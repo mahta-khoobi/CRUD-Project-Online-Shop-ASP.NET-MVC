@@ -109,7 +109,8 @@ namespace Sample02.Models.DomainModels.POCO
             {
                 try
                 {
-                    context.Entry(ref_ProductCategory).State = EntityState.Modified;
+                    // context.Entry(ref_ProductCategory).State = EntityState.Modified;
+                    context.usp_ProductCategory_Update(ref_ProductCategory.Id, ref_ProductCategory.CategoryCode, ref_ProductCategory.CategoryName);
                     
                     context.SaveChanges();
                 }
