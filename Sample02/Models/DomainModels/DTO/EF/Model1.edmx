@@ -279,7 +279,7 @@
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
           <FunctionImport Name="usp_ProductCategory_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="usp_ProductCategory_Insert">
             <Parameter Name="categoryCode" Mode="In" Type="Int32" />
