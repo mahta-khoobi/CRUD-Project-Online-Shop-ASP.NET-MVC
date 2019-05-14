@@ -80,7 +80,7 @@ namespace Sample02.Models.DomainModels.POCO
                     var itemToRemove = context.ProductCategory.SingleOrDefault(x => x.Id == ref_ProductCategory.Id);
                     if (itemToRemove != null)
                     {
-                        context.ProductCategory.Remove(itemToRemove);
+                        context.usp_ProductCategory_Delete(itemToRemove.Id);
                         context.SaveChanges();
                     }
                 }
@@ -110,6 +110,7 @@ namespace Sample02.Models.DomainModels.POCO
                 try
                 {
                     context.Entry(ref_ProductCategory).State = EntityState.Modified;
+                    
                     context.SaveChanges();
                 }
                 catch (Exception)
