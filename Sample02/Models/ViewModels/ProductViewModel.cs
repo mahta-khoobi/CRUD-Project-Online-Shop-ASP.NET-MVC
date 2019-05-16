@@ -26,8 +26,9 @@ namespace Sample02.Models.ViewModels
         public string ProductDescription { get; set; }
         public decimal UnitPrice { get; set; }
         public int Category_Ref { get; set; }
-        #endregion
 
+        public virtual Models.DomainModels.DTO.EF.ProductCategory ProductCategory { get; set; }
+        #endregion
 
         #region [- Save(int productCode, string productName, string productDescription,decimal unitPrice,int category_ref) -]
         public void Save(int productCode, string productName, string productDescription,decimal unitPrice,int category_ref)
