@@ -223,6 +223,7 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\POCO\ProductCategoryCrud.cs" />
+    <Compile Include="Models\DomainModels\POCO\ProductCrud.cs" />
     <Compile Include="Models\ViewModels\ProductCategoryViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
