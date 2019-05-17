@@ -16,6 +16,33 @@ namespace Sample02.Models.DomainModels.POCO
 
         }
         #endregion
+
+        #region [-SelectAll()-]
+        public List<Models.DomainModels.DTO.EF.ProductCategory> SelectAll()
+        {
+            using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
+            {
+
+                try
+                {
+                    var q = context.usp_ProductCategory_Select().ToList();
+
+                    return q;
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+
+                }
+            }
+
+        }
+        #endregion
+
         #region [-Insert(DomainModels.DTO.EF.ProductCategory ref_ProductCategory)-]
         public void Insert(DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
         {
@@ -24,7 +51,7 @@ namespace Sample02.Models.DomainModels.POCO
                 try
                 {
 
-                    context.ProductCategory.Add(ref_ProductCategory);
+                    context.usp_ProductCategory_Insert(ref_ProductCategory.CategoryCode, ref_ProductCategory.CategoryName);
                     context.SaveChanges();
                 }
                 catch (Exception)
@@ -44,33 +71,6 @@ namespace Sample02.Models.DomainModels.POCO
         }
         #endregion
 
-        //other way is using list
-        #region [-SelectAll()-]
-        public List<Models.DomainModels.DTO.EF.ProductCategory> SelectAll()
-        {
-            using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
-            {
-
-                try
-                {
-                    var q = context.ProductCategory.ToList();
-
-                    return q;
-                }
-                catch (Exception)
-                {
-
-                    throw;
-                }
-                finally
-                {
-
-                }
-            }
-
-        }
-        #endregion
-
         #region [-Remove(DomainModels.DTO.EF.ProductCategory ref_ProductCategory)-]
         public void Remove(DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
         {
@@ -81,7 +81,7 @@ namespace Sample02.Models.DomainModels.POCO
                     var itemToRemove = context.ProductCategory.SingleOrDefault(x => x.Id == ref_ProductCategory.Id);
                     if (itemToRemove != null)
                     {
-                        context.ProductCategory.Remove(itemToRemove);
+                        context.usp_ProductCategory_Delete(itemToRemove.Id);
                         context.SaveChanges();
                     }
                 }
@@ -110,7 +110,9 @@ namespace Sample02.Models.DomainModels.POCO
             {
                 try
                 {
-                    context.Entry(ref_ProductCategory).State = EntityState.Modified;
+                    // context.Entry(ref_ProductCategory).State = EntityState.Modified;
+                    context.usp_ProductCategory_Update(ref_ProductCategory.Id, ref_ProductCategory.CategoryCode, ref_ProductCategory.CategoryName);
+                    
                     context.SaveChanges();
                 }
                 catch (Exception)

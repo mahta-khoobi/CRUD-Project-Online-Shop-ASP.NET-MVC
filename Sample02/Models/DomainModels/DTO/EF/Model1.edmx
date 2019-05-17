@@ -112,7 +112,19 @@
         <Function Name="usp_Customer_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_OrderMaster_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_Product_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_ProductCategory_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_ProductCategory_Insert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="categoryCode" Type="int" Mode="In" />
+          <Parameter Name="categoryName" Type="nvarchar" Mode="In" />
+        </Function>
         <Function Name="usp_ProductCategory_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_ProductCategory_Update" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="id" Type="int" Mode="In" />
+          <Parameter Name="categoryCode" Type="int" Mode="In" />
+          <Parameter Name="categoryName" Type="nvarchar" Mode="In" />
+        </Function>
         <EntityContainer Name="OnlineShopModelStoreContainer">
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
@@ -261,11 +273,23 @@
           <FunctionImport Name="usp_Customer_Select" ReturnType="Collection(OnlineShopModel.usp_Customer_Select_Result)" />
           <FunctionImport Name="usp_OrderMaster_Select" ReturnType="Collection(OnlineShopModel.usp_OrderMaster_Select_Result)" />
           <FunctionImport Name="usp_Product_Select" ReturnType="Collection(OnlineShopModel.usp_Product_Select_Result)" />
-          <FunctionImport Name="usp_ProductCategory_Select" ReturnType="Collection(OnlineShopModel.usp_ProductCategory_Select_Result)" />
+          <FunctionImport Name="usp_ProductCategory_Select" EntitySet="ProductCategory" ReturnType="Collection(OnlineShopModel.ProductCategory)" />
           <AssociationSet Name="FK_OrderDetails_Product" Association="OnlineShopModel.FK_OrderDetails_Product">
             <End Role="Product" EntitySet="Product" />
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
+          <FunctionImport Name="usp_ProductCategory_Delete">
+          <Parameter Name="id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_ProductCategory_Insert">
+            <Parameter Name="categoryCode" Mode="In" Type="Int32" />
+            <Parameter Name="categoryName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_ProductCategory_Update">
+            <Parameter Name="id" Mode="In" Type="Int32" />
+            <Parameter Name="categoryCode" Mode="In" Type="Int32" />
+            <Parameter Name="categoryName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_Customer_Select_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -420,14 +444,10 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_ProductCategory_Select" FunctionName="OnlineShopModel.Store.usp_ProductCategory_Select">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="OnlineShopModel.usp_ProductCategory_Select_Result">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="CategoryCode" ColumnName="CategoryCode" />
-                <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
-              </ComplexTypeMapping>
-            </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_ProductCategory_Delete" FunctionName="OnlineShopModel.Store.usp_ProductCategory_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_ProductCategory_Insert" FunctionName="OnlineShopModel.Store.usp_ProductCategory_Insert" />
+          <FunctionImportMapping FunctionImportName="usp_ProductCategory_Update" FunctionName="OnlineShopModel.Store.usp_ProductCategory_Update" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

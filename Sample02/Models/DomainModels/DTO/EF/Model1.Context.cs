@@ -48,9 +48,53 @@ namespace Sample02.Models.DomainModels.DTO.EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Product_Select_Result>("usp_Product_Select");
         }
     
-        public virtual ObjectResult<usp_ProductCategory_Select_Result> usp_ProductCategory_Select()
+        public virtual ObjectResult<ProductCategory> usp_ProductCategory_Select()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_ProductCategory_Select_Result>("usp_ProductCategory_Select");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductCategory>("usp_ProductCategory_Select");
+        }
+    
+        public virtual ObjectResult<ProductCategory> usp_ProductCategory_Select(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ProductCategory>("usp_ProductCategory_Select", mergeOption);
+        }
+    
+        public virtual int usp_ProductCategory_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_ProductCategory_Delete", idParameter);
+        }
+    
+        public virtual int usp_ProductCategory_Insert(Nullable<int> categoryCode, string categoryName)
+        {
+            var categoryCodeParameter = categoryCode.HasValue ?
+                new ObjectParameter("categoryCode", categoryCode) :
+                new ObjectParameter("categoryCode", typeof(int));
+    
+            var categoryNameParameter = categoryName != null ?
+                new ObjectParameter("categoryName", categoryName) :
+                new ObjectParameter("categoryName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_ProductCategory_Insert", categoryCodeParameter, categoryNameParameter);
+        }
+    
+        public virtual int usp_ProductCategory_Update(Nullable<int> id, Nullable<int> categoryCode, string categoryName)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            var categoryCodeParameter = categoryCode.HasValue ?
+                new ObjectParameter("categoryCode", categoryCode) :
+                new ObjectParameter("categoryCode", typeof(int));
+    
+            var categoryNameParameter = categoryName != null ?
+                new ObjectParameter("categoryName", categoryName) :
+                new ObjectParameter("categoryName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_ProductCategory_Update", idParameter, categoryCodeParameter, categoryNameParameter);
         }
     }
 }
