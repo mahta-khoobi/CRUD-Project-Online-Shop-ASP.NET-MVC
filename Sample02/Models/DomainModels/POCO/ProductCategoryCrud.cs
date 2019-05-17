@@ -16,6 +16,7 @@ namespace Sample02.Models.DomainModels.POCO
 
         }
         #endregion
+
         #region [-SelectAll()-]
         public List<Models.DomainModels.DTO.EF.ProductCategory> SelectAll()
         {
