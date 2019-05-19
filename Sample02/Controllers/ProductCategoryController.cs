@@ -20,6 +20,7 @@ namespace Sample02.Controllers
         #region [-Properties-]
         public Models.ViewModels.ProductCategoryViewModel Ref_ProductCategoryViewModel { get; set; } 
         #endregion
+
         #region [-Actions-]
 
         // GET: ProductCategory
