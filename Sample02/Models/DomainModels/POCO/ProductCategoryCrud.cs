@@ -16,6 +16,7 @@ namespace Sample02.Models.DomainModels.POCO
 
         }
         #endregion
+
         #region [-Insert(DomainModels.DTO.EF.ProductCategory ref_ProductCategory)-]
         public void Insert(DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
         {
@@ -46,7 +47,7 @@ namespace Sample02.Models.DomainModels.POCO
 
         //other way is using list
         #region [-SelectAll()-]
-        public dynamic SelectAll()
+        public List<Models.DomainModels.DTO.EF.ProductCategory> SelectAll()
         {
             using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
             {

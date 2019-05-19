@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Sample02.Models.DomainModels.DTO.EF.ProductCategory>
+﻿@model Sample02.Models.ViewModels.ProductCategoryViewModel
 
 @{
     ViewBag.Title = "Product Category";
@@ -20,7 +20,7 @@
         <th></th>
     </tr>
 
-    @foreach (var item in Model)
+    @foreach (var item in Model.FillGrid())
     {
         <tr>
             <td>
