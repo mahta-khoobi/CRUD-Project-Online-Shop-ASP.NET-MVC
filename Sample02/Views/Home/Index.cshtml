@@ -4,7 +4,46 @@
 }
 
 <h2>Index</h2>
-
+<script src="~/Scripts/kendo.angular.min.js"></script>
 @using Kendo.Mvc.UI
+
 @(Html.Kendo().DatePicker().Name("MYDP").Value(DateTime.Now))
+
+@(Html.Kendo().Grid((IEnumerable<Sample02.Models.DomainModels.DTO.EF.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
+                .Name("grid")
+                .Columns(columns =>
+                {
+        //Create a column bound to the ProductID property.
+        columns.Bound(product => product.Id);
+        //Create a column bound to the ProductName property.
+        columns.Bound(product => product.ProductCode);
+        //Create a column bound to the UnitsInStock property.
+        columns.Bound(product => product.ProductName);
+                })
+                .Pageable() //Enable the paging.
+                .Sortable() //Enable the sorting.
+)
+
+@(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.Product>()
+                       .Name("ProductGrid")
+                         .DataSource(dataSource => dataSource
+                            .Ajax()  // Asynchronous JavaScript and XML
+                           .Read(read => read.Action("FillGrid", "Home"))
+                     )
+                       .Columns(columns =>
+                       {
+               
+                           columns.Bound(p => p.Id).Title("Id");
+                           columns.Bound(p => p.ProductCode).Title("Code");
+                           columns.Bound(p => p.ProductName).Title("Name");
+
+                       })
+                       .Pageable()
+                       .Sortable()
+
+                     
+)
+
+
+
 

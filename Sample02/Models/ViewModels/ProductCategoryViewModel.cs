@@ -37,7 +37,7 @@ namespace Sample02.Models.ViewModels
         #endregion
 
         #region [-dynamic FillGrid()-]
-        public List<Models.DomainModels.DTO.EF.ProductCategory> FillGrid() //goftim dynamic k moshkele view dar refresh hal shavad va lazem nist list bargardanad
+        public dynamic FillGrid() //goftim dynamic k moshkele view dar refresh hal shavad va lazem nist list bargardanad
         {
             return Ref_ProductCategoryCrud.SelectAll();
         }

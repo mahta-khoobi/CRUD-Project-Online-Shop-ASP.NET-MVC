@@ -1,4 +1,6 @@
-﻿using Sample02.Models.DomainModels.DTO.EF;
+﻿using Kendo.Mvc.Extensions;
+using Kendo.Mvc.UI;
+using Sample02.Models.DomainModels.DTO.EF;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -19,20 +21,32 @@ namespace Sample02.Controllers
         #endregion
 
         #region [-Properties-]
-        public Models.ViewModels.ProductCategoryViewModel Ref_ProductCategoryViewModel { get; set; } 
+        public Models.ViewModels.ProductCategoryViewModel Ref_ProductCategoryViewModel { get; set; }
         #endregion
 
         #region [-Actions-]
 
-        // GET: ProductCategory
-        #region [-Index()-]
-        public ActionResult Index()
+        #region [-ProductCategory()-]
+        public ActionResult ProductCategory()
         {
             return View(Ref_ProductCategoryViewModel);
         }
+
         #endregion
 
+        #region [- FillGrid([DataSourceRequest] DataSourceRequest request) -]
+         public JsonResult FillGrid([DataSourceRequest] DataSourceRequest request)
+        {
+            //Models.DomainModels.DTO.EF.OnlineShopEntities db_onlineShop = new OnlineShopEntities();
+            //IQueryable<ProductCategory> productCategory = db_onlineShop.ProductCategory;
+            //DataSourceResult result = productCategory.ToDataSourceResult(request);
 
+            //return Json(result,JsonRequestBehavior.AllowGet);
+            IEnumerable<Models.DomainModels.DTO.EF.ProductCategory> q = Ref_ProductCategoryViewModel.FillGrid();
+            //var q = Ref_CategoryViewModel.FillGrid();
+             return Json(q.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+
+        }
         #endregion
 
         #region [- Create()  -]
@@ -116,6 +130,10 @@ namespace Sample02.Controllers
             return RedirectToAction("Index");
         }
         #endregion
+
+        #endregion
+
+
 
     }
 }

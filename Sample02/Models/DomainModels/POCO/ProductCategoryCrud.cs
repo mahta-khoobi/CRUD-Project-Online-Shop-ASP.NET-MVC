@@ -45,15 +45,16 @@ namespace Sample02.Models.DomainModels.POCO
         }
         #endregion
 
-        //other way is using list
         #region [-SelectAll()-]
-        public List<Models.DomainModels.DTO.EF.ProductCategory> SelectAll()
+        public IEnumerable<Models.DomainModels.DTO.EF.ProductCategory> SelectAll()
         {
             using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
             {
 
                 try
                 {
+                    //to avoid server error
+                    context.Configuration.ProxyCreationEnabled = false;
                     var q = context.ProductCategory.ToList();
 
                     return q;
