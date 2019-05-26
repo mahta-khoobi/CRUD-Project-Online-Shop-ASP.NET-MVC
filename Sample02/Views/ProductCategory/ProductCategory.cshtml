@@ -158,13 +158,14 @@
             //***
             //************** Delete ********************
         $("#btnDelete").click(function () {
-            alert("delete");
+
+            var answer = confirm("Are you sure you want to delete this Record?");
+
+            if (answer) {
 
                 $.ajax({
 
-                    url: "/ProductCategory/Delete",
-
-                    data: JSON.stringify(ref_ProductCategory),
+                    url: "/ProductCategory/Delete/" + ref_ProductCategory.Id,
 
                     type: "POST",
 
@@ -180,11 +181,12 @@
 
                     error: function (errormessage) {
 
-                        alert(errormessage.responseText);
+                        
 
                     }
 
                 });
+            }
             })
             //***
             //************** Refresh ********************

@@ -70,6 +70,7 @@ namespace Sample02.Controllers
 
         #region [- Edit() -]
         [HttpPost]
+ 
         public ActionResult Edit([Bind(Include = "Id,CategoryCode,CategoryName")] ProductCategory productCategory)
         {
             if (ModelState.IsValid)
@@ -85,12 +86,19 @@ namespace Sample02.Controllers
         #endregion
 
         #region [- Delete() -]
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete([Bind(Include = "Id,CategoryCode,CategoryName")] ProductCategory productCategory)
+        [HttpPost]     
+        public ActionResult Delete(int id)
         {
-            Ref_ProductCategoryViewModel.Delete(productCategory.Id);
-            return View("ProductCategory");
+            if (ModelState.IsValid)
+            {
+                Ref_ProductCategoryViewModel.Delete(id);
+                return RedirectToAction("ProductCategory");
+            }
+            else
+            {
+                return View("ProductCategory");
+            }
+            
         }
         #endregion
 
