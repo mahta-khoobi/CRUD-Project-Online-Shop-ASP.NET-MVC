@@ -44,13 +44,14 @@ namespace Sample02.Models.DomainModels.POCO
         #endregion
 
         #region [-SelectAll()-]
-        public List<Models.DomainModels.DTO.EF.Product> SelectAll()
+        public IEnumerable<Models.DomainModels.DTO.EF.Product> SelectAll()
         {
             using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
             {
 
                 try
                 {
+                    context.Configuration.ProxyCreationEnabled = false;
                     var q = context.Product.ToList();
 
                     return q;
