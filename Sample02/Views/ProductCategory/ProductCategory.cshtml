@@ -4,53 +4,25 @@
 @using Kendo.Mvc.UI
 
 @{
-    ViewBag.Title = "ProductCategory";
-    Layout = null;
+    ViewBag.Title = "Product Category";
+    
 }
 
-<!DOCTYPE html>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    @* ==================== *@
-    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
-
-    <link href="~/Content/kendo.common.min.css" rel="stylesheet" />
-    <link href="~/Content/kendo.default.min.css" rel="stylesheet" />
-
-    <script src="~/Scripts/jquery.min.js"></script>
-    <script src="~/Scripts/kendo.all.min.js"></script>
-    <script src="~/Scripts/kendo.angular.min.js"></script>
-    <script src="~/Scripts/kendo.web.min.js"></script>
-
-
-    <script src="~/Scripts/modernizr-2.6.2.js"></script>
-    @* ==================== *@
-    @*<script src="~/Scripts/Category.js"></script>*@
-    <title>Product Category</title>
-</head>
-<body>
     <div class="container-fluid">
         <hr />
-        <h2>Category</h2>
+        <h2>Product Category</h2>
         <hr />
         @using (Html.BeginForm())
         {
-            @Html.AntiForgeryToken()
-            <div class="row form-groups" id="panelBar">
-                ||
-                <input class="btn btn-success col-sm-2" type="submit" name="saveButton" id="btnSave" value="Save" />
-                ||
-                <input class="btn btn-warning col-sm-2" type="submit" name="editButton" id="btnEdit" value="Edit" />
-                ||
-                <input class="btn btn-danger col-sm-2" type="button" name="deleteButton" id="btnDelete" value="Delete" />
-                ||
-                <input class="btn btn-info col-sm-2" type="button" name="refreshButton" id="btnRefresh" value="Refresh" />
-                ||
-            </div>
+            @Html.AntiForgeryToken();
+        <div>
+            @{
+                Html.RenderAction("ShowToolbar", "Partial");
+            }
+
+        </div>
+          
             <div class="form-horizontal">
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
@@ -73,97 +45,145 @@
 
             </div>
         }
-            <div class="row kendoGrid">
-                @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.ProductCategory>()
-                   .Name("ProductCategoryGrid")
-                   .Columns(columns =>
-                   {
-                //columns.Bound(p => p.Id).Hidden(true);
-                       columns.Bound(p => p.Id).Title("Id");
-                       columns.Bound(p => p.CategoryCode).Title("CategoryCode");
-                       columns.Bound(p => p.CategoryName).Title("CategoryName");
+        <div class="row kendoGrid">
+            @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.ProductCategory>()
+                       .Name("ProductCategoryGrid")
+                       .Columns(columns =>
+                       {
+                   
+                           columns.Bound(p => p.Id).Title("شناسه");
+                           columns.Bound(p => p.CategoryCode).Title(" کد گروه ");
+                           columns.Bound(p => p.CategoryName).Title("نام گروه");
 
-                   })
-                   .Pageable()
-                   .Navigatable()
-                   .Selectable()
-                   .Sortable()
-                   .Scrollable()
-                   .Filterable()
-                   .Events(events => events.Change("OnRowSelect"))
-                   .DataSource(dataSource => dataSource
-                        .Ajax()  // Asynchronous JavaScript and XML
-                       .Batch(true)
-                       .PageSize(20)
-                       .ServerOperation(false)
-                       .Model(model => model.Id(p => p.Id))
-                       .Read(read => read.Action("FillGrid", "ProductCategory"))
-                 )  
-                )
+                       })
+                       .Pageable()
+                       .Navigatable()
+                       .Selectable()
+                       .Sortable()
+                       .Scrollable()
+                       .Filterable()
+                       .Events(events => events.Change("OnRowSelect"))
+                       .DataSource(dataSource => dataSource
+                            .Ajax()  
+                           .Batch(true)
+                           .PageSize(20)
+                           .ServerOperation(false)
+                           .Model(model => model.Id(p => p.Id))
+                           .Read(read => read.Action("FillGrid", "ProductCategory"))
+                     )
+            )
 
-            </div>
+        </div>
     </div>
     <script type="text/javascript">
+
+        var ref_ProductCategory = {};
+       
+
             //************** Save ********************
-            $("#btnSave").click(function () {
-                alert("Save");
-                var ref_productCategory = {};
-                ref_productCategory.CategoryCode = $("#code").val();
-                ref_productCategory.CategoryName = $("#name").val();
-                alert("ref_productCategory.CategoryCode= " + ref_productCategory.CategoryCode);
+        $("#btnSave").click(function () {
+
+            ref_ProductCategory = {
+
+                    CategoryCode: $('#code').val(),
+
+                    CategoryName: $('#name').val(),
+            };
+
                 $.ajax({
-                    type: "POST",
+
                     url: "/ProductCategory/Create",
-                    data: '{name: "' + $("#txtName").val() + '" }',
-                    contentType: "application/json; charset=utf-8",
+    
+                    data: JSON.stringify(ref_ProductCategory),
+
+                    type: "POST",
+
+                    contentType: "application/json;charset=utf-8",
+
                     dataType: "json",
-                    success: function (response) {
-                        alert("Hello: " + response.Name + " .\nCurrent Date and Time: " + response.DateTime);
+
+                    success: function (result) {
+
+                        location.reload();
+
                     },
-                    failure: function (response) {
-                        alert(response.responseText);
-                    },
-                    error: function (response) {
-                        alert(response.responseText);
+
+                    error: function (errormessage) {
+
+                        alert(errormessage.responseText);
+
                     }
+
                 });
             })
             //***
             //************** Edit ********************
-            $("#btnEdit").click(function () {
-                var grid = $("#CategoryGrid").data("kendoGrid");
-                var selectedRow = grid.dataItem(grid.select());
-                var ref_Category = {};
-                ref_Category.Id = selectedRow.Id;
-                ref_Category.Code = $("#code").val();
-                ref_Category.Name = $("#name").val();
-                $.post("/Category/Edit", { ref_Category: ref_Category }, function (data) {
-                    if (data != null) {
-                        alert("Edit was done!");
+        $("#btnEdit").click(function () {
+
+            ref_ProductCategory = {
+
+                Id: ref_ProductCategory.Id,
+
+                CategoryCode: $('#code').val(),
+
+                CategoryName: $('#name').val(),
+            };
+
+                $.ajax({
+
+                    url: "/ProductCategory/Edit",
+
+                    data: JSON.stringify(ref_ProductCategory),
+
+                    type: "POST",
+
+                    contentType: "application/json;charset=utf-8",
+
+                    dataType: "json",
+
+                    success: function (result) {
+
                         location.reload();
+
+                    },
+
+                    error: function (errormessage) {
+
+                        alert(errormessage.responseText);
+
                     }
-                    else {
-                        alert("Error");
-                    }
+
                 });
             })
             //***
             //************** Delete ********************
-            $("#btnDelete").click(function () {
-                var grid = $("#CategoryGrid").data("kendoGrid");
-                var selectedRow = grid.dataItem(grid.select());
-                var ref_Category = {};
-                ref_Category.Id = selectedRow.Id;
-                ref_Category.Code = $("#code").val();
-                ref_Category.Name = $("#name").val();
-                $.post("/Category/Delete", { ref_Category: ref_Category }, function (data) {
-                    if (data != null) {
-                        alert("Delete was done!");
+        $("#btnDelete").click(function () {
+            alert("delete");
+
+                $.ajax({
+
+                    url: "/ProductCategory/Delete",
+
+                    data: JSON.stringify(ref_ProductCategory),
+
+                    type: "POST",
+
+                    contentType: "application/json;charset=utf-8",
+
+                    dataType: "json",
+
+                    success: function (result) {
+
                         location.reload();
+
+                    },
+
+                    error: function (errormessage) {
+
+                        alert(errormessage.responseText);
+
                     }
-                    else {
-                        alert("Error");
-                    }
+
                 });
             })
             //***
@@ -177,15 +197,10 @@
             OnRowSelect = function (e) {
                 var grid = $("#ProductCategoryGrid").data("kendoGrid");
                 var selectedRow = this.dataItem(this.select());
-                //alert(selectedRow.Id);
-                //alert(selectedRow.Id);
-                var categoryModel = {};
-                $("#code").val(selectedRow.Code);
-                $("#name").val(selectedRow.Name);
-                categoryModel.Id = selectedRow.Id;
+                $("#code").val(selectedRow.CategoryCode);
+                $("#name").val(selectedRow.CategoryName);
+                ref_ProductCategory.Id = selectedRow.Id;
             }
             //***
     </script>
 
-</body>
-</html>

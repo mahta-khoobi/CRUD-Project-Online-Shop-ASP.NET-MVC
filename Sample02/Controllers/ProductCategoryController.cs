@@ -49,85 +49,48 @@ namespace Sample02.Controllers
         }
         #endregion
 
-        #region [- Create()  -]
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        #endregion
-
-        #region [- Create() :Post -]
+        #region [- Create() -]
         [HttpPost]
         public ActionResult Create([Bind(Include = "Id,CategoryCode,CategoryName")] ProductCategory productCategory)
         {
 
             if (ModelState.IsValid)
             {
-                Ref_ProductCategoryViewModel.Save(productCategory.CategoryCode, productCategory.CategoryName);
-
-                return RedirectToAction("Index");
+                Ref_ProductCategoryViewModel.Save(productCategory);
+                return RedirectToAction("ProductCategory");
             }
+            else { return View("ProductCategory"); }
 
-            return View(Ref_ProductCategoryViewModel);
+            
 
         }
 
 
         #endregion
 
-        #region [- Edit() :Get -]
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                // return RedirectToAction("index");
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            if (Ref_ProductCategoryViewModel.GetRecord(id) == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(Ref_ProductCategoryViewModel);
-
-
-        }
-        #endregion
-
-        #region [- Edit() :Post -]
+        #region [- Edit() -]
         [HttpPost]
         public ActionResult Edit([Bind(Include = "Id,CategoryCode,CategoryName")] ProductCategory productCategory)
         {
-            Ref_ProductCategoryViewModel.Edit(productCategory.Id, productCategory.CategoryCode, productCategory.CategoryName);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                Ref_ProductCategoryViewModel.Edit(productCategory);
+                return RedirectToAction("ProductCategory");
+            }
+            else
+            {
+                return View("ProductCategory");
+            }
         }
         #endregion
 
-        #region [- Delete() :Get -]
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-
-            if (Ref_ProductCategoryViewModel.GetRecord(id) == null)
-            {
-                return HttpNotFound();
-            }
-            return View(Ref_ProductCategoryViewModel);
-        }
-        #endregion
-
-        #region [- DeleteConfirmed() :Post -]
-        [HttpPost, ActionName("Delete")]
+        #region [- Delete() -]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult Delete([Bind(Include = "Id,CategoryCode,CategoryName")] ProductCategory productCategory)
         {
-
-            Ref_ProductCategoryViewModel.Delete(id);
-            return RedirectToAction("Index");
+            Ref_ProductCategoryViewModel.Delete(productCategory.Id);
+            return View("ProductCategory");
         }
         #endregion
 

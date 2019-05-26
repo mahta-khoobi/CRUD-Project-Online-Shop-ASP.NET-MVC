@@ -22,21 +22,17 @@ namespace Sample02.Models.ViewModels
         #region [-props for Model-]
         public int Id { get; set; }
         public int CategoryCode { get; set; }
-        public string CategoryName { get; set; } 
+        public string CategoryName { get; set; }
         #endregion
 
-        #region [- Save(string categoryName) -]
-        public void Save(int categoryCode,string categoryName)
+        #region [- Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory) -]
+        public void Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
         {
-            Ref_ProductCateory = new Models.DomainModels.DTO.EF.ProductCategory();
-            Ref_ProductCateory.CategoryCode = categoryCode;
-            Ref_ProductCateory.CategoryName = categoryName;
-            Ref_ProductCategoryCrud.Insert(Ref_ProductCateory);
-
+            Ref_ProductCategoryCrud.Insert(ref_ProductCategory);
         }
         #endregion
 
-        #region [-dynamic FillGrid()-]
+        #region [- FillGrid() -]
         public dynamic FillGrid() //goftim dynamic k moshkele view dar refresh hal shavad va lazem nist list bargardanad
         {
             return Ref_ProductCategoryCrud.SelectAll();
@@ -48,21 +44,17 @@ namespace Sample02.Models.ViewModels
         {
             Ref_ProductCateory = new Models.DomainModels.DTO.EF.ProductCategory();
             Ref_ProductCateory.Id = id;
-
             Ref_ProductCategoryCrud.Remove(Ref_ProductCateory);
 
         }
 
         #endregion
 
-        #region [- Edit(int id, int categoryCode, string categoryName) -]
-        public void Edit(int id,int categoryCode, string categoryName)
+        #region [- Edit(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory) -]
+        public void Edit(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
         {
-            Ref_ProductCateory = new Models.DomainModels.DTO.EF.ProductCategory();
-            Ref_ProductCateory.Id = id;
-            Ref_ProductCateory.CategoryCode = categoryCode;
-            Ref_ProductCateory.CategoryName = categoryName;
-            Ref_ProductCategoryCrud.Update(Ref_ProductCateory);
+           
+            Ref_ProductCategoryCrud.Update(ref_ProductCategory);
 
         }
         #endregion
