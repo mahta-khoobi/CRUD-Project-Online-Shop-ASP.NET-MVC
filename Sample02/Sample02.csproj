@@ -261,6 +261,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\ProductCategory\ProductCategory.cshtml" />
     <Content Include="Views\Partial\ShowToolbar.cshtml" />
+    <Content Include="Views\Product\Product.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -271,7 +272,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Models\DomainModels\DTO\MetaData\" />
-    <Folder Include="Views\Product\" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />

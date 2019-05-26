@@ -1,0 +1,256 @@
+﻿
+@model Sample02.Models.ViewModels.ProductViewModel
+
+@using Kendo.Mvc.UI
+
+@{
+    ViewBag.Title = "Product";
+
+}
+
+
+<div class="container-fluid">
+    <hr />
+    <h2>Product</h2>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken();
+        <div>
+            @{
+                Html.RenderAction("ShowToolbar", "Partial");
+            }
+
+        </div>
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductCode, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ProductCode, new { @id = "code", htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ProductName, new { @id = "name", htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.ProductDescription, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.ProductDescription, new { @id = "description", htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ProductDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.UnitPrice, new { @id = "unitPrice", htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Category_Ref, "Category_Ref", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownList("Category_Ref", null, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Category_Ref, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    }
+    <div class="row kendoGrid">
+        @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.Product>()
+                           .Name("ProductGrid")
+                           .Columns(columns =>
+                           {
+
+                               columns.Bound(p => p.Id).Title("شناسه");
+                               columns.Bound(p => p.ProductCode).Title(" کد کالا ");
+                               columns.Bound(p => p.ProductName).Title("نام کالا");
+                               columns.Bound(p => p.ProductDescription).Title("توضیحات");
+                               columns.Bound(p => p.UnitPrice).Title("قیمت");
+                               columns.Bound(p => p.Category_Ref).Title("کد گروه کالا");
+
+
+
+                           })
+                           .Pageable()
+                           .Navigatable()
+                           .Selectable()
+                           .Sortable()
+                           .Scrollable()
+                           .Filterable()
+                           .Events(events => events.Change("OnRowSelect"))
+                           .DataSource(dataSource => dataSource
+                                .Ajax()
+                               .Batch(true)
+                               .PageSize(20)
+                               .ServerOperation(false)
+                               .Model(model => model.Id(p => p.Id))
+                               .Read(read => read.Action("FillGrid", "Product"))
+                         )
+        )
+
+    </div>
+</div>
+<script type="text/javascript">
+
+        var ref_Product = {};
+
+
+            //************** Save ********************
+        $("#btnSave").click(function () {
+
+            ref_Product = {
+
+                ProductCode: $('#code').val(),
+
+                ProductName: $('#name').val(),
+
+                ProductDescription: $('#description').val(),
+
+                UnitPrice: $('#unitPrice').val(),
+
+                Category_Ref: $('category_ref').val(),
+
+
+            };
+
+                $.ajax({
+
+                    url: "/Product/Create",
+
+                    data: JSON.stringify(ref_Product),
+
+                    type: "POST",
+
+                    contentType: "application/json;charset=utf-8",
+
+                    dataType: "json",
+
+                    success: function (result) {
+
+                        location.reload();
+
+                    },
+
+                    error: function (errormessage) {
+
+                        alert(errormessage.responseText);
+
+                    }
+
+                });
+            })
+            //***
+            //************** Edit ********************
+        $("#btnEdit").click(function () {
+
+            ref_Product = {
+
+                Id: ref_Product.Id,
+
+                ProductCode: $('#code').val(),
+
+                ProductName: $('#name').val(),
+
+                ProductDescription: $('#description').val(),
+
+                UnitPrice: $('#unitPrice').val(),
+
+                Category_Ref: $('category_ref').val(),
+
+
+            };
+
+                $.ajax({
+
+                    url: "/Product/Edit",
+
+                    data: JSON.stringify(ref_Product),
+
+                    type: "POST",
+
+                    contentType: "application/json;charset=utf-8",
+
+                    dataType: "json",
+
+                    success: function (result) {
+
+                        location.reload();
+
+                    },
+
+                    error: function (errormessage) {
+
+                        alert(errormessage.responseText);
+
+                    }
+
+                });
+            })
+            //***
+            //************** Delete ********************
+        $("#btnDelete").click(function () {
+
+            var answer = confirm("Are you sure you want to delete this Record?");
+
+            if (answer) {
+
+                $.ajax({
+
+                    url: "/Product/Delete/" + ref_Product.Id,
+
+                    type: "POST",
+
+                    contentType: "application/json;charset=utf-8",
+
+                    dataType: "json",
+
+                    success: function (result) {
+
+                        location.reload();
+
+                    },
+
+                    error: function (errormessage) {
+
+
+
+                    }
+
+                });
+            }
+            })
+            //***
+            //************** Refresh ********************
+            $("#btnRefresh").click(function () {
+
+                location.reload();
+            })
+            //***
+            //************** OnRowSelect ******************
+            OnRowSelect = function (e) {
+                var grid = $("#ProductGrid").data("kendoGrid");
+                var selectedRow = this.dataItem(this.select());
+                $("#code").val(selectedRow.ProductCode);
+                $("#name").val(selectedRow.ProductName);
+                $("#description").val(selectedRow.ProductDescription);
+                $("#unitPrice").val(selectedRow.UnitPrice);
+                $("#category_ref").val(selectedRow.Category_Ref);
+                ref_Product.Id = selectedRow.Id;
+            }
+            //***
+</script>
+
