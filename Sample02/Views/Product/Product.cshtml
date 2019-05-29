@@ -5,32 +5,31 @@
 
 @{
     ViewBag.Title = "Product";
+    ViewBag.HeaderName = "Product";
 
 }
 
 
-<div class="container-fluid">
-    <hr />
-    <h2>Product</h2>
-    <hr />
+
+    
     @using (Html.BeginForm())
     {
         @Html.AntiForgeryToken();
-        <div>
+        <div class="form-horizontal">
             @{
                 Html.RenderAction("ShowToolbar", "Partial");
             }
 
         </div>
-
-        <div class="form-horizontal">
-            <hr />
+ 
+        <div class="form-horizontal border rounded p-2">
+            
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="form-group">
                 @Html.LabelFor(model => model.ProductCode, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.ProductCode, new { @id = "code", htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.ProductCode, new { @id = "code", htmlAttributes = new { @class = "form-control col-md-2" } })
                     @Html.ValidationMessageFor(model => model.ProductCode, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -38,7 +37,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.ProductName, new { @id = "name", htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.ProductName, new { @id = "name", htmlAttributes = new { @class = "form-control col-md-2" } })
                     @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -46,7 +45,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.ProductDescription, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.ProductDescription, new { @id = "description", htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.ProductDescription, new { @id = "description", htmlAttributes = new { @class = "form-control col-md-2" } })
                     @Html.ValidationMessageFor(model => model.ProductDescription, "", new { @class = "text-danger" })
                 </div>
             </div>
@@ -54,22 +53,47 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.TextBoxFor(model => model.UnitPrice, new { @id = "unitPrice", htmlAttributes = new { @class = "form-control" } })
+                    @Html.TextBoxFor(model => model.UnitPrice, new { @id = "unitPrice", htmlAttributes = new { @class = "form-control col-md-2" } })
                     @Html.ValidationMessageFor(model => model.UnitPrice, "", new { @class = "text-danger" })
                 </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(model => model.Category_Ref, "Category_Ref", htmlAttributes: new { @class = "control-label col-md-2" })
+                @Html.LabelFor(model => model.Category_Ref, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
-                    @Html.DropDownList("Category_Ref", null, htmlAttributes: new { @class = "form-control" })
+                    @*@(Html.Kendo().ComboBoxFor(m => m.Id)
+                       .Name("CategoryComboBox")
+                       .DataTextField("ProductName")
+                       .DataValueField("Id")
+                        .DataSource(source =>
+                        {
+                            source.Read(read =>
+                            {
+                                read.Action("FillGrid", "Product"); //Set the Action and Controller names.
+                            })
+                            .ServerFiltering(true); //If true, the DataSource will not filter the data on the client.
+                        })
+                        .Events(e => e
+                        .Select("OnComboBoxSelect"))
+        )*@
+                 
+
+                    @Html.DropDownListFor(model => model.Category_Ref, new SelectList(
+                                  Model.Ref_ProductCategoryViewModel.FillGrid(),
+                                  "Id",
+                                  "CategoryName",
+                                  Model.Category_Ref
+                                  ),
+                                 htmlAttributes: new {@id="productCategoryList", @class = "form-control col-md-3", @onChange = "SelectedValue(this)" }
+                                  )
                     @Html.ValidationMessageFor(model => model.Category_Ref, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-        </div>
+            
+            </div>
     }
-    <div class="row kendoGrid">
+        <br />
+        <div class="row kendoGrid">
         @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.Product>()
                            .Name("ProductGrid")
                            .Columns(columns =>
@@ -103,10 +127,11 @@
         )
 
     </div>
-</div>
+
 <script type="text/javascript">
 
-        var ref_Product = {};
+    var ref_Product = {};
+    var selectedCategoryRefID=0;
 
 
             //************** Save ********************
@@ -122,7 +147,7 @@
 
                 UnitPrice: $('#unitPrice').val(),
 
-                Category_Ref: $('category_ref').val(),
+                Category_Ref: selectedCategoryRefID,
 
 
             };
@@ -169,7 +194,7 @@
 
                 UnitPrice: $('#unitPrice').val(),
 
-                Category_Ref: $('category_ref').val(),
+              
 
 
             };
@@ -252,5 +277,22 @@
                 ref_Product.Id = selectedRow.Id;
             }
             //***
+    OnComboBoxSelect = function (e) {
+        var comboBox = $('#CategoryComboBox').data("kendoComboBox");
+        var selectedItem = this.dataItem(this.select());
+        ref_Product.Category_Ref = selectedItem.Id;
+    }
+
+    function SelectedValue(ddlObject) {
+        //Selected value of dropdownlist  
+        var selectedValue = ddlObject.value;
+        //Selected text of dropdownlist  
+        var selectedText = ddlObject.options[ddlObject.selectedIndex].innerHTML;
+
+        //alert popup with detail of seleceted value and text  
+       // alert(" Selected Value: " + selectedValue + " -- " + "Selected Text: " + selectedText);
+        ref_Product.Category_Ref = SelectedValue;
+        selectedCategoryRefID = SelectedValue;
+    }  
 </script>
 

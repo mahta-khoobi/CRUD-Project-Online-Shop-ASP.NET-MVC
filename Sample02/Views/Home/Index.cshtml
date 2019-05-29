@@ -1,49 +1,51 @@
 ﻿
 @{
     ViewBag.Title = "Index";
+    ViewBag.HeaderName = "Home";
 }
 
-<h2>Index</h2>
-<script src="~/Scripts/kendo.angular.min.js"></script>
-@using Kendo.Mvc.UI
 
-@(Html.Kendo().DatePicker().Name("MYDP").Value(DateTime.Now))
 
-@(Html.Kendo().Grid((IEnumerable<Sample02.Models.DomainModels.DTO.EF.Product>)ViewBag.Products) //Bind the grid to ViewBag.Products
-                .Name("grid")
-                .Columns(columns =>
-                {
-        //Create a column bound to the ProductID property.
-        columns.Bound(product => product.Id);
-        //Create a column bound to the ProductName property.
-        columns.Bound(product => product.ProductCode);
-        //Create a column bound to the UnitsInStock property.
-        columns.Bound(product => product.ProductName);
-                })
-                .Pageable() //Enable the paging.
-                .Sortable() //Enable the sorting.
-)
+<div class="jumbotron text-center" style="margin-bottom:0">
+    <h1>My Online Shop</h1>
+    <p>Buy Online !</p>
+    <hr />
+    <div class="card-deck">
+        <div class="card bg-light">
 
-@(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.Product>()
-                       .Name("ProductGrid")
-                         .DataSource(dataSource => dataSource
-                            .Ajax()  // Asynchronous JavaScript and XML
-                           .Read(read => read.Action("FillGrid", "Home"))
-                     )
-                       .Columns(columns =>
-                       {
-               
-                           columns.Bound(p => p.Id).Title("Id");
-                           columns.Bound(p => p.ProductCode).Title("Code");
-                           columns.Bound(p => p.ProductName).Title("Name");
+            <div class="card-body">
+                <h4 class="card-title">Product Category Management</h4>
+                <p class="card-text">Some example text.</p>
+                @Html.ActionLink("Go to consule", "ProductCategory", "ProductCategory", new { area = "" }, new { @class = "btn btn-primary " })
 
-                       })
-                       .Pageable()
-                       .Sortable()
+            </div>
+        </div>
+        <div class="card bg-light">
+            <div class="card-body">
+                <h4 class="card-title">Product Management</h4>
+                <p class="card-text">Some example text.</p>
+                @Html.ActionLink("Go to consule", "Product", "Product", new { area = "" }, new { @class = "btn btn-primary " })
 
-                     
-)
+            </div>
+        </div>
+        <div class="card bg-light">
+            <div class="card-body">
+                <h4 class="card-title">Customer Management</h4>
+                <p class="card-text">Some example text.</p>
+                @Html.ActionLink("Go to consule", "Customer", "Customer", new { area = "" }, new { @class = "btn btn-primary " })
 
+            </div>
+        </div>
+        <div class="card bg-light">
+            <div class="card-body">
+                <h4 class="card-title">Order Management</h4>
+                <p class="card-text">Some example text.</p>
+                @Html.ActionLink("Go to consule", "Order", "Order", new { area = "" }, new { @class = "btn btn-primary " })
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

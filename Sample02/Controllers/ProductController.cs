@@ -96,6 +96,13 @@ namespace Sample02.Controllers
         }
         #endregion
 
+        //public IEnumerable<Sample02.Models.DomainModels.DTO.EF.Product> GetProductCategoryList()
+        //{
+        //    var result = Ref_ProductViewModel.FillGrid();
+        //    return result;
+        //    //return (DataSourceResult(result), JsonRequestBehavior.AllowGet);
+        //}
+
         #endregion
     }
 }

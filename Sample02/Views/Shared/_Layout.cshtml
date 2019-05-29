@@ -16,33 +16,66 @@
     <link href="~/Content/kendo.common.min.css" rel="stylesheet" />
     <link href="~/Content/kendo.default.min.css" rel="stylesheet" />
 
+    <style>
+       
+        * {
+            box-sizing: border-box;
+        }
+     
+    </style>
+
+
 
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Online Shop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
-            </div>
-        </div>
-    </div>
+            
+            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+                <!-- Brand -->
+                @Html.ActionLink("Online Shop", "Index", "Home", new { area = "" }, new { @class = "navbar-brand display-1 " })
 
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
+                <!-- Toggler/collapsibe Button -->
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <!-- Navbar links -->
+                <div class="collapse navbar-collapse" id="collapsibleNavbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item">
+                            @Html.ActionLink("Home", "Index", "Home", new { area = "" }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item dropdown ">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                                Services
+                            </a>
+                            <div class="dropdown-menu bg-dark ">
+                                @Html.ActionLink("Product Category", "ProductCategory", "ProductCategory", new { area = "" }, new { @class = "dropdown-item text-info" })
+                                @Html.ActionLink("Product", "Product", "Product", new { area = "" }, new { @class = "dropdown-item text-info" })
+                                @Html.ActionLink("Customer", "Customer", "Customer", new { area = "" }, new { @class = "dropdown-item text-info" })
+                                @Html.ActionLink("Order", "Order", "Order", new { area = "" }, new { @class = "dropdown-item text-info" })
+
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">About Us</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contact Us</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+     
+            <br />
+            <div class="container ">
+                <h2 class="container mw-100 p-3 bg-light rounded shadow-sm">@ViewBag.HeaderName</h2>
+                
+                @RenderBody()
+                <hr />
+                <footer>
+                    <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                </footer>
+            </div>
 
     @*<script src="~/Scripts/jquery-1.10.2.min.js"></script>*@
     <script src="~/Scripts/bootstrap.min.js"></script>

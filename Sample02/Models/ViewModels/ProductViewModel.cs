@@ -11,12 +11,14 @@ namespace Sample02.Models.ViewModels
         public ProductViewModel()
         {
             Ref_ProductCrud = new DomainModels.POCO.ProductCrud();
+            Ref_ProductCategoryViewModel = new ProductCategoryViewModel();
         }
         #endregion
 
         #region [-props for class-]
         public Models.DomainModels.DTO.EF.Product Ref_Product { get; set; }
         public Models.DomainModels.POCO.ProductCrud Ref_ProductCrud { get; set; }
+        public Models.ViewModels.ProductCategoryViewModel Ref_ProductCategoryViewModel { get; set; }
         #endregion
 
         #region [-props for Model-]
