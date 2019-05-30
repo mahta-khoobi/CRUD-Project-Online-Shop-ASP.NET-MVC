@@ -166,7 +166,8 @@
 
                     success: function (result) {
 
-                        location.reload();
+                        //location.reload();
+                        alert("Save is done!");
 
                     },
 
@@ -194,8 +195,7 @@
 
                 UnitPrice: $('#unitPrice').val(),
 
-              
-
+                Category_Ref: selectedCategoryRefID,
 
             };
 
@@ -213,7 +213,7 @@
 
                     success: function (result) {
 
-                        location.reload();
+                        alert("Update is done!");
 
                     },
 
@@ -245,7 +245,7 @@
 
                     success: function (result) {
 
-                        location.reload();
+                        alert("Delete is done!");
 
                     },
 
@@ -284,15 +284,12 @@
     }
 
     function SelectedValue(ddlObject) {
-        //Selected value of dropdownlist  
-        var selectedValue = ddlObject.value;
-        //Selected text of dropdownlist  
+   
+        var selectedValue = ddlObject.value; 
         var selectedText = ddlObject.options[ddlObject.selectedIndex].innerHTML;
-
-        //alert popup with detail of seleceted value and text  
-       // alert(" Selected Value: " + selectedValue + " -- " + "Selected Text: " + selectedText);
-        ref_Product.Category_Ref = SelectedValue;
-        selectedCategoryRefID = SelectedValue;
+        ref_Product.Category_Ref = selectedValue;
+        selectedCategoryRefID = selectedValue;
+        alert(selectedCategoryRefID);
     }  
 </script>
 

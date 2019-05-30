@@ -27,9 +27,9 @@ namespace Sample02.Models.ViewModels
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public decimal UnitPrice { get; set; }
-        public Nullable<int> Category_Ref { get; set; }
+        public int Category_Ref { get; set; }
 
-        public virtual Models.DomainModels.DTO.EF.ProductCategory ProductCategory { get; set; }
+       // public virtual Models.DomainModels.DTO.EF.ProductCategory ProductCategory { get; set; }
         #endregion
 
         #region [- Save() -]

@@ -51,10 +51,10 @@ namespace Sample02.Controllers
             if (ModelState.IsValid)
             {
                 Ref_ProductViewModel.Save(product);
-                return RedirectToAction("Product");
+                return RedirectToAction("FillGrid()");
             }
-            else { return View("Product"); }
 
+            return RedirectToAction("FillGrid()");
 
 
         }
@@ -70,11 +70,11 @@ namespace Sample02.Controllers
             if (ModelState.IsValid)
             {
                 Ref_ProductViewModel.Edit(product);
-                return RedirectToAction("Product");
+                return RedirectToAction("FillGrid()");
             }
             else
             {
-                return View("Product");
+                return RedirectToAction("FillGrid()");
             }
         }
         #endregion
@@ -86,11 +86,11 @@ namespace Sample02.Controllers
             if (ModelState.IsValid)
             {
                 Ref_ProductViewModel.Delete(id);
-                return RedirectToAction("Product");
+                return RedirectToAction("FillGrid()");
             }
             else
             {
-                return View("Product");
+                return RedirectToAction("FillGrid()");
             }
 
         }
