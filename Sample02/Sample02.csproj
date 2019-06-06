@@ -199,6 +199,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\PartialController.cs" />
     <Compile Include="Controllers\ProductCategoryController.cs" />
     <Compile Include="Controllers\ProductController.cs" />
@@ -247,8 +248,10 @@
     <Compile Include="Models\DomainModels\DTO\EF\usp_Product_Select_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DomainModels\POCO\OrderCrud.cs" />
     <Compile Include="Models\DomainModels\POCO\ProductCategoryCrud.cs" />
     <Compile Include="Models\DomainModels\POCO\ProductCrud.cs" />
+    <Compile Include="Models\ViewModels\OrderViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -262,6 +265,7 @@
     <Content Include="Views\ProductCategory\ProductCategory.cshtml" />
     <Content Include="Views\Partial\ShowToolbar.cshtml" />
     <Content Include="Views\Product\Product.cshtml" />
+    <Content Include="Views\Order\Order.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

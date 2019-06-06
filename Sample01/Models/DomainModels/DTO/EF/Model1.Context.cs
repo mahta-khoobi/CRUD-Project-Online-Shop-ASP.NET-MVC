@@ -27,5 +27,8 @@ namespace Sample01.Models.DomainModels.DTO.EF
     
         public virtual DbSet<Product> Product { get; set; }
         public virtual DbSet<ProductCategory> ProductCategory { get; set; }
+        public virtual DbSet<Customer> Customer { get; set; }
+        public virtual DbSet<OrderDetails> OrderDetails { get; set; }
+        public virtual DbSet<OrderMaster> OrderMaster { get; set; }
     }
 }

@@ -12,23 +12,27 @@ namespace Sample01.Models.DomainModels.DTO.EF
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class Customer
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public Customer()
         {
-            this.OrderDetails = new HashSet<OrderDetails>();
+            this.OrderMaster = new HashSet<OrderMaster>();
         }
     
         public int Id { get; set; }
-        public int ProductCode { get; set; }
-        public string ProductName { get; set; }
-        public string ProductDescription { get; set; }
-        public Nullable<decimal> UnitPrice { get; set; }
-        public Nullable<int> Category_Ref { get; set; }
+        public Nullable<int> CustomerCode { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Adrs { get; set; }
+        public string City { get; set; }
+        public string Region { get; set; }
+        public string Country { get; set; }
+        public string PostalCode { get; set; }
+        public string Phone { get; set; }
+        public string Email { get; set; }
     
-        public virtual ProductCategory ProductCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrderDetails> OrderDetails { get; set; }
+        public virtual ICollection<OrderMaster> OrderMaster { get; set; }
     }
 }

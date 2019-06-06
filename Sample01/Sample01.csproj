@@ -156,10 +156,14 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\OrderMastersController.cs" />
     <Compile Include="Controllers\ProductCategoriesController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModels\DTO\EF\Customer.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\DTO\EF\Model1.Context.cs">
       <AutoGen>True</AutoGen>
@@ -175,6 +179,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModels\DTO\EF\OrderDetails.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DomainModels\DTO\EF\OrderMaster.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\DTO\EF\Product.cs">
       <DependentUpon>Model1.tt</DependentUpon>
@@ -250,6 +260,11 @@
     <Content Include="Views\Products\Details.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
+    <Content Include="Views\OrderMasters\Create.cshtml" />
+    <Content Include="Views\OrderMasters\Delete.cshtml" />
+    <Content Include="Views\OrderMasters\Details.cshtml" />
+    <Content Include="Views\OrderMasters\Edit.cshtml" />
+    <Content Include="Views\OrderMasters\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

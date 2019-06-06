@@ -51,10 +51,10 @@ namespace Sample02.Controllers
             if (ModelState.IsValid)
             {
                 Ref_ProductViewModel.Save(product);
-                return RedirectToAction("FillGrid()");
+                return RedirectToAction("FillGrid");
             }
 
-            return RedirectToAction("FillGrid()");
+            return RedirectToAction("FillGrid");
 
 
         }
@@ -86,11 +86,11 @@ namespace Sample02.Controllers
             if (ModelState.IsValid)
             {
                 Ref_ProductViewModel.Delete(id);
-                return RedirectToAction("FillGrid()");
+                return RedirectToAction("FillGrid");
             }
             else
             {
-                return RedirectToAction("FillGrid()");
+                return RedirectToAction("FillGrid");
             }
 
         }

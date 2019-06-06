@@ -38,9 +38,14 @@ namespace Sample02.Models.DomainModels.DTO.EF
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_Customer_Select_Result>("usp_Customer_Select");
         }
     
-        public virtual ObjectResult<usp_OrderMaster_Select_Result> usp_OrderMaster_Select()
+        public virtual ObjectResult<OrderMaster> usp_OrderMaster_Select()
         {
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_OrderMaster_Select_Result>("usp_OrderMaster_Select");
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<OrderMaster>("usp_OrderMaster_Select");
+        }
+    
+        public virtual ObjectResult<OrderMaster> usp_OrderMaster_Select(MergeOption mergeOption)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<OrderMaster>("usp_OrderMaster_Select", mergeOption);
         }
     
         public virtual ObjectResult<usp_Product_Select_Result> usp_Product_Select()
