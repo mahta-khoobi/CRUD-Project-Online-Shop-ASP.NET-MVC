@@ -259,7 +259,7 @@
             <End Role="Product" EntitySet="Product" />
           </AssociationSet>
           <FunctionImport Name="usp_Customer_Select" ReturnType="Collection(OnlineShopModel.usp_Customer_Select_Result)" />
-          <FunctionImport Name="usp_OrderMaster_Select" EntitySet="OrderMaster" ReturnType="Collection(OnlineShopModel.OrderMaster)" />
+          <FunctionImport Name="usp_OrderMaster_Select" ReturnType="Collection(OnlineShopModel.usp_OrderMaster_Select_Result)" />
           <FunctionImport Name="usp_Product_Select" ReturnType="Collection(OnlineShopModel.usp_Product_Select_Result)" />
           <FunctionImport Name="usp_ProductCategory_Select" ReturnType="Collection(OnlineShopModel.usp_ProductCategory_Select_Result)" />
           <AssociationSet Name="FK_OrderDetails_Product" Association="OnlineShopModel.FK_OrderDetails_Product">
@@ -397,6 +397,15 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_OrderMaster_Select" FunctionName="OnlineShopModel.Store.usp_OrderMaster_Select">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OnlineShopModel.usp_OrderMaster_Select_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="OrderCode" ColumnName="OrderCode" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="Customer_Ref" ColumnName="Customer_Ref" />
+                <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_Product_Select" FunctionName="OnlineShopModel.Store.usp_Product_Select">
             <ResultMapping>

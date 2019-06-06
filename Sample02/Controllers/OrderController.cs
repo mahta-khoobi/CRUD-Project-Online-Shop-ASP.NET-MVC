@@ -30,7 +30,7 @@ namespace Sample02.Controllers
         public JsonResult FillGrid([DataSourceRequest] DataSourceRequest request)
         {
 
-            IEnumerable<Models.DomainModels.DTO.EF.OrderMaster> q = Ref_OrderViewModel.FillGrid();
+            IEnumerable<Models.DomainModels.DTO.EF.usp_OrderMaster_Select_Result> q = Ref_OrderViewModel.FillGrid();
 
             return Json(q.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
 

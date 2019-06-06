@@ -17,7 +17,7 @@ namespace Sample02.Models.DomainModels.POCO
         #endregion
 
         #region [- SelectAll()-]
-        public IEnumerable<Models.DomainModels.DTO.EF.OrderMaster> SelectAll()
+        public IEnumerable<Models.DomainModels.DTO.EF.usp_OrderMaster_Select_Result> SelectAll()
         {
             using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
             {

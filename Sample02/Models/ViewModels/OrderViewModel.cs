@@ -25,6 +25,7 @@ namespace Sample02.Models.ViewModels
         public int OrderCode { get; set; }
         public System.DateTime OrderDate { get; set; }
         public int Customer_Ref { get; set; }
+       // public int CustomerCode { get; set; }
         public virtual ICollection<Models.DomainModels.DTO.EF.OrderDetails> OrderDetails { get; set; }
         #endregion
 

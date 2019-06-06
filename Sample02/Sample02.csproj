@@ -248,6 +248,7 @@
     <Compile Include="Models\DomainModels\DTO\EF\usp_Product_Select_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DomainModels\DTO\Helper\OrderHelper.cs" />
     <Compile Include="Models\DomainModels\POCO\OrderCrud.cs" />
     <Compile Include="Models\DomainModels\POCO\ProductCategoryCrud.cs" />
     <Compile Include="Models\DomainModels\POCO\ProductCrud.cs" />

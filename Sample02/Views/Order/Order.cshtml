@@ -29,7 +29,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrderCode, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OrderCode, new { @id = "code", htmlAttributes = new { @class = "form-control col-md-2" } })
+                @Html.TextBoxFor(model => model.OrderCode, new { @id = "code", htmlAttributes = new { @class = "form-control col-md-2" } })
                 @Html.ValidationMessageFor(model => model.OrderCode, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -38,7 +38,7 @@
             @Html.LabelFor(model => model.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @(Html.Kendo().DatePicker()
-              .Name("datepicker") 
+              .Name("date") 
               .Min(new DateTime(1900, 1, 1)) 
               .Max(new DateTime(2099, 12, 31)) 
               .Value(DateTime.Today) //Set the value of the DatePicker.
@@ -50,7 +50,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Customer_Ref, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Customer_Ref, new { @id = "customer_ref", htmlAttributes = new { @class = "form-control" } })
+                @Html.TextBoxFor(model => model.Customer_Ref, new { @id = "customer_ref", htmlAttributes = new { @class = "form-control col-md-2" } })
                 @*@Html.DropDownListFor(model => model.Customer_Ref, new SelectList(
          Model.FillGrid(),
          "Id",
@@ -67,7 +67,7 @@
 }
 <br />
 <div class="row kendoGrid">
-    @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.OrderMaster>()
+    @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.usp_OrderMaster_Select_Result>()
                                .Name("OrderGrid")
                                .Columns(columns =>
                                {
@@ -75,8 +75,9 @@
                                    columns.Bound(p => p.Id).Title("شناسه");
                                    columns.Bound(p => p.OrderCode).Title("Order Code");
                                    columns.Bound(p => p.OrderDate).Title("Order Date");
-                                   columns.Bound(p => p.Customer_Ref).Title("Customer Code");
-                                   
+                                   columns.Bound(p => p.Customer_Ref).Title("Customer ID");
+                                   columns.Bound(p => p.CustomerCode).Title("Customer Code");
+
 
 
                                })
@@ -160,22 +161,20 @@
         ref_Order.Id = selectedRow.Id;
     }
     //***
-    OnComboBoxSelect = function (e) {
-        var comboBox = $('#customerList').data("kendoComboBox");
-        var selectedItem = this.dataItem(this.select());
-        ref_Order.Customer_Ref = selectedItem.Id;
-    }
+    //OnComboBoxSelect = function (e) {
+    //    var comboBox = $('#customerList').data("kendoComboBox");
+    //    var selectedItem = this.dataItem(this.select());
+    //    ref_Order.Customer_Ref = selectedItem.Id;
+    //}
 
-    function SelectedValue(ddlObject) {
+    //function SelectedValue(ddlObject) {
 
-        var selectedValue = ddlObject.value;
-        var selectedText = ddlObject.options[ddlObject.selectedIndex].innerHTML;
-        ref_Order.Customer_Ref = selectedValue;
-        selectedCustomer_RefID  = selectedValue;
-        alert(selectedCustomer_RefID );
-    }
-    function DatepickerEnable() {
-        $("#date").kendoDatePicker();
-    }
+    //    var selectedValue = ddlObject.value;
+    //    var selectedText = ddlObject.options[ddlObject.selectedIndex].innerHTML;
+    //    ref_Order.Customer_Ref = selectedValue;
+    //    selectedCustomer_RefID  = selectedValue;
+    //    alert(selectedCustomer_RefID );
+    //}
+
 
     </script>
