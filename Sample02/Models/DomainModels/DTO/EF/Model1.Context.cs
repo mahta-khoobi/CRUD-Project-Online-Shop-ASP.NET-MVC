@@ -52,5 +52,14 @@ namespace Sample02.Models.DomainModels.DTO.EF
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_ProductCategory_Select_Result>("usp_ProductCategory_Select");
         }
+    
+        public virtual int usp_OrderMasterDetails_Delete(Nullable<int> id)
+        {
+            var idParameter = id.HasValue ?
+                new ObjectParameter("id", id) :
+                new ObjectParameter("id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_OrderMasterDetails_Delete", idParameter);
+        }
     }
 }

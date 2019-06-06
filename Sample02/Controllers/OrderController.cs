@@ -55,5 +55,22 @@ namespace Sample02.Controllers
 
 
         #endregion
+
+        #region [- Delete() -]
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                Ref_OrderViewModel.Delete(id);
+                return RedirectToAction("FillGrid");
+            }
+            else
+            {
+                return RedirectToAction("FillGrid");
+            }
+
+        }
+        #endregion
     }
 }

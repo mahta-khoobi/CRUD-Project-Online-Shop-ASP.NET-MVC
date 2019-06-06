@@ -40,9 +40,16 @@ namespace Sample02.Models.ViewModels
         public void Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, ICollection<Models.DomainModels.DTO.EF.OrderDetails> orderDetails)
         {
             Ref_OrderCrud.Insert(ref_OrderMaster, orderDetails);
-        } 
+        }
         #endregion
 
+        #region [-Delete(int id)-]
+        public void Delete(int id)
+        {
+            
+            Ref_OrderCrud.Remove(id);
+        } 
+        #endregion
 
     }
 }

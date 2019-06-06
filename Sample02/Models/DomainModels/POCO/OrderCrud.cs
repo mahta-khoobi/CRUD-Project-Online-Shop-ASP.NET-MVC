@@ -16,7 +16,7 @@ namespace Sample02.Models.DomainModels.POCO
         }
         #endregion
 
-        #region [- SelectAll()-]
+        #region [-SelectAll()-]
         public IEnumerable<Models.DomainModels.DTO.EF.usp_OrderMaster_Select_Result> SelectAll()
         {
             using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
@@ -102,6 +102,38 @@ namespace Sample02.Models.DomainModels.POCO
         }
         #endregion
 
-       
+        #region [-Remove(int id)-]
+        public void Remove(int id)
+        {
+            using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
+            
+                try
+                {
+                    var i = context.OrderMaster.Where(p => p.Id == id).Select(p => p);
+                    if (i != null)
+                    {
+                        
+                        context.usp_OrderMasterDetails_Delete(id);
+                        context.SaveChanges();
+                    }
+                }
+
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+                    if (context != null)
+                    {
+                        context.Dispose();
+                    }
+
+                }
+            }
+        }
+        #endregion
+
+
     }
-}

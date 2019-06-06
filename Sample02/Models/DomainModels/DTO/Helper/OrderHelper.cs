@@ -7,5 +7,11 @@ namespace Sample02.Models.DomainModels.DTO.Helper
 {
     public class OrderHelper
     {
+        #region [-ctor-]
+        public OrderHelper()
+        {
+
+        } 
+        #endregion
     }
 }

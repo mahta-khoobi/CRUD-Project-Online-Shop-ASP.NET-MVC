@@ -152,6 +152,39 @@
                 });
     })
 
+    //************** Delete ********************
+    $("#btnDelete").click(function () {
+
+        var answer = confirm("Are you sure you want to delete this Record?");
+
+        if (answer) {
+
+            $.ajax({
+
+                url: "/Order/Delete/" + ref_Order.Id,
+
+                type: "POST",
+
+                contentType: "application/json;charset=utf-8",
+
+                dataType: "json",
+
+                success: function (result) {
+
+                    alert("Delete is done!");
+
+                },
+
+                error: function (errormessage) {
+
+
+
+                }
+
+            });
+        }
+    })
+
     OnRowSelect = function (e) {
         var grid = $("#OrderGrid").data("kendoGrid");
         var selectedRow = this.dataItem(this.select());
