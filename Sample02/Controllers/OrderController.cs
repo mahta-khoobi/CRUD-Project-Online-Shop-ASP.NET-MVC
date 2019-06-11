@@ -38,13 +38,13 @@ namespace Sample02.Controllers
         #endregion
 
         #region [- Create() -]
-        [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,OrderCode,OrderDate,Customer_Ref")] Sample02.Models.DomainModels.DTO.EF.OrderMaster orderMaster)
+      [HttpPost]
+        public ActionResult Create([Bind(Include = "Id,OrderCode,OrderDate,Customer_Ref")] Sample02.Models.DomainModels.DTO.EF.OrderMaster orderMaster, List<Sample02.Models.DomainModels.DTO.EF.OrderDetails> orderDetails)
         {
 
             if (ModelState.IsValid)
             {
-               // Ref_OrderViewModel.Save(orderMaster,I);
+                Ref_OrderViewModel.Save(orderMaster,null);
                 return RedirectToAction("FillGrid");
             }
 

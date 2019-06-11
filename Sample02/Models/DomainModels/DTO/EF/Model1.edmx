@@ -270,7 +270,7 @@
             <End Role="OrderDetails" EntitySet="OrderDetails" />
           </AssociationSet>
           <FunctionImport Name="usp_OrderMasterDetails_Delete">
-            <Parameter Name="id" Mode="In" Type="Int32" />
+          <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_Customer_Select_Result">

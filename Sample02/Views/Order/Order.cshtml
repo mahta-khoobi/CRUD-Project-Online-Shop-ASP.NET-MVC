@@ -100,34 +100,62 @@
 
 </div>
 
+<div class="row kendoGrid">
+    @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.Helper.OrderHelper>()
+    .Name("OrderDetailsGrid")
+    )
+
+</div>
+
 <script type="text/javascript">
 
     var ref_Order = {};
-    var selectedCustomer_RefID=0;
-
+    var selectedCustomer_RefID = 0;
+    var orderDetails = 
+    
+        [
+            { UnitPrice: 3, Discount: 89, TaxRate: 90, Quantity: 8, Product_Ref: 18 },
+            { UnitPrice: 3, Discount: 89, TaxRate: 90, Quantity: 8, Product_Ref: 18 },
+        ];
     //$(document).ready(function () {
     //    $("#date").datepicker({ dateFormat: 'dd/mm/yy' });
     //});
 
             //************** Save ********************
-        $("#btnSave").click(function () {
+    $("#btnSave").click(function () {
+        alert(orderDetails[1].UnitPrice);
+        // var orderDetailsGrid = $("#OrderDetailsGrid").data("kendoGrid").dataSource.data;
 
-            ref_Product = {
+        //  alert(JSON.stringify({ griditems: orderDetailsGrid.dataSource.view() }));
+        
+
+        // var dataToSend = [{ fieldname: 'ABC' }, { fieldname: 'DEF' }];
+        //var orderDetails1 = JSON.stringify(orderDetails);    
+        
+        var datetimepicker = $("#date").kendoDatePicker({
+            value: new Date(),
+            min: new Date(2019, 0, 1),
+            max: new Date()
+        });
+        ref_Order = {
 
                 OrderCode: $('#code').val(),
 
-                OrderDate: $('#date').val(),
+            OrderDate: datetimepicker,
 
                 Customer_Ref: $('#customer_ref').val(),
 
 
-            };
+        };
+        
+      //var  ref_Order1 = JSON.stringify(ref_Order );
+      // var orderDetails1 = JSON.stringify( orderDetails );
 
-                $.ajax({
+        $.ajax({
 
-                    url: "/Order/Create",
+            url: "/Order/Create/" + ref_Order + orderDetails,
 
-                    data: JSON.stringify(ref_Product),
+          //  data: { json_1: $.toJSON(ref_Order), json_2: $.toJSON(orderDetails) },
 
                     type: "POST",
 
@@ -192,6 +220,37 @@
         $("#date").val(selectedRow.OrderDate);
         $("#customer_ref").val(selectedRow.Customer_Ref);
         ref_Order.Id = selectedRow.Id;
+
+
+
+       // OrderDetailsGrid
+        //var orderDetails = [
+        //    {  UnitPrice: 3, Discount: 89, TaxRate: 90, Quantity: 8, Product_Ref: 18,  }
+        //    , {  UnitPrice: 6, Discount: 99, TaxRate: 88, Quantity: 9, Product_Ref: 18 }
+        //];
+
+
+        //$('#OrderDetailsGrid').kendoGrid({
+        //    scrollable: true,
+        //    sortable: true,
+        //    pageable: true,
+        //    selectable: "row",
+        //    filterable: true
+        //    , columns:
+        //        [
+                   
+        //            { field: "UnitPrice", title: "UnitPrice" }
+        //            , { field: "Discount", title: "Discount" }
+        //            , { field: "TaxRate", title: "TaxRate" }
+        //            , { field: "Quantity", title: "Quantity" }
+        //            , { field: "Product_Ref", title: "Product_Ref" }
+                   
+                    
+        //            ]
+        //    , dataSource: { data: orderDetails, pageSize: 10 } //binding JSON data with grid
+
+        //});
+  
     }
     //***
     //OnComboBoxSelect = function (e) {

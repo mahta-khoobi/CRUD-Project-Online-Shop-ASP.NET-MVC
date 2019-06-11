@@ -37,7 +37,7 @@ namespace Sample02.Models.ViewModels
         #endregion
 
         #region [-Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, ICollection<Models.DomainModels.DTO.EF.OrderDetails> orderDetails)-]
-        public void Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, ICollection<Models.DomainModels.DTO.EF.OrderDetails> orderDetails)
+        public void Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, List<Models.DomainModels.DTO.Helper.OrderHelper> orderDetails)
         {
             Ref_OrderCrud.Insert(ref_OrderMaster, orderDetails);
         }

@@ -11,7 +11,12 @@ namespace Sample02.Models.DomainModels.DTO.Helper
         public OrderHelper()
         {
 
-        } 
+        }
         #endregion
+        public decimal UnitPrice { get; set; }
+        public decimal Discount { get; set; }
+        public decimal TaxRate { get; set; }
+        public int Quantity { get; set; }
+        public int Product_Ref { get; set; }
     }
 }
