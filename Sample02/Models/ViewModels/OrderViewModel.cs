@@ -25,8 +25,9 @@ namespace Sample02.Models.ViewModels
         public int OrderCode { get; set; }
         public System.DateTime OrderDate { get; set; }
         public int Customer_Ref { get; set; }
-       // public int CustomerCode { get; set; }
-        public virtual ICollection<Models.DomainModels.DTO.EF.OrderDetails> OrderDetails { get; set; }
+        // public int CustomerCode { get; set; }
+        public Models.DomainModels.DTO.Helper.OrderHelper OrderDetail_Ref { get; set; }
+        public IEnumerable<Models.DomainModels.DTO.Helper.OrderHelper> OrderDetails { get; set; }
         #endregion
 
         #region [-FillGrid()-]
@@ -37,7 +38,7 @@ namespace Sample02.Models.ViewModels
         #endregion
 
         #region [-Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, ICollection<Models.DomainModels.DTO.EF.OrderDetails> orderDetails)-]
-        public void Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, List<Models.DomainModels.DTO.Helper.OrderHelper> orderDetails)
+        public void Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, IEnumerable<Models.DomainModels.DTO.Helper.OrderHelper> orderDetails)
         {
             Ref_OrderCrud.Insert(ref_OrderMaster, orderDetails);
         }

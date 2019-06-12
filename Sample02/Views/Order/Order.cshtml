@@ -23,6 +23,7 @@
     </div>
 
     <div class="form-horizontal border rounded p-2">
+        <h4>Order Information</h4>
 
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -38,10 +39,10 @@
             @Html.LabelFor(model => model.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @(Html.Kendo().DatePicker()
-              .Name("date") 
-              .Min(new DateTime(1900, 1, 1)) 
-              .Max(new DateTime(2099, 12, 31)) 
-              .Value(DateTime.Today) //Set the value of the DatePicker.
+                                      .Name("date")
+                                      .Min(new DateTime(1900, 1, 1))
+                                      .Max(new DateTime(2099, 12, 31))
+                                      .Value(DateTime.Today) //Set the value of the DatePicker.
                 )
                 @Html.ValidationMessageFor(model => model.OrderDate, "", new { @class = "text-danger" })
             </div>
@@ -52,57 +53,113 @@
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Customer_Ref, new { @id = "customer_ref", htmlAttributes = new { @class = "form-control col-md-2" } })
                 @*@Html.DropDownListFor(model => model.Customer_Ref, new SelectList(
-         Model.FillGrid(),
-         "Id",
-         "CustomerName",
-         Model.Customer_Ref
-         ),
-        htmlAttributes: new {@id="customerList", @class = "form-control col-md-3", @onChange = "SelectedValue(this)" }
-         )*@
-                @Html.ValidationMessageFor(model => model.Customer_Ref, "", new { @class = "text-danger"  })
+                 Model.FillGrid(),
+                 "Id",
+                 "CustomerName",
+                 Model.Customer_Ref
+                 ),
+                htmlAttributes: new {@id="customerList", @class = "form-control col-md-3", @onChange = "SelectedValue(this)" }
+                 )*@
+                @Html.ValidationMessageFor(model => model.Customer_Ref, "", new { @class = "text-danger" })
             </div>
         </div>
 
     </div>
+    <br />
+    <div class="form-horizontal border rounded p-2">
+        <h4>Order Items</h4>
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderDetail_Ref.UnitPrice, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.OrderDetail_Ref.UnitPrice, new { @id = "unitPrice", htmlAttributes = new { @class = "form-control col-md-2" } })
+                @Html.ValidationMessageFor(model => model.OrderDetail_Ref.UnitPrice, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderDetail_Ref.Discount, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.OrderDetail_Ref.Discount, new { @id = "discount", htmlAttributes = new { @class = "form-control col-md-2" } })
+                @Html.ValidationMessageFor(model => model.OrderDetail_Ref.Discount, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderDetail_Ref.TaxRate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.OrderDetail_Ref.TaxRate, new { @id = "taxRate", htmlAttributes = new { @class = "form-control col-md-2" } })
+                @Html.ValidationMessageFor(model => model.OrderDetail_Ref.TaxRate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderDetail_Ref.Quantity, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.OrderDetail_Ref.Quantity, new { @id = "quantity", htmlAttributes = new { @class = "form-control col-md-2" } })
+
+                @Html.ValidationMessageFor(model => model.OrderDetail_Ref.Quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.OrderDetail_Ref.Product_Ref, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.OrderDetail_Ref.Product_Ref, new { @id = "product_ref", htmlAttributes = new { @class = "form-control col-md-2" } })
+
+                @Html.ValidationMessageFor(model => model.OrderDetail_Ref.Product_Ref, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div>
+            <input class="btn btn-outline-info " type="button" name="addButton" id="btnAdd" value="Add to list" />
+        </div>
+
+    </div>
+
+
+
 }
+
 <br />
 <div class="row kendoGrid">
     @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.usp_OrderMaster_Select_Result>()
-                               .Name("OrderGrid")
-                               .Columns(columns =>
-                               {
+                                               .Name("OrderGrid")
+                                               .Columns(columns =>
+                                               {
 
-                                   columns.Bound(p => p.Id).Title("شناسه");
-                                   columns.Bound(p => p.OrderCode).Title("Order Code");
-                                   columns.Bound(p => p.OrderDate).Title("Order Date");
-                                   columns.Bound(p => p.Customer_Ref).Title("Customer ID");
-                                   columns.Bound(p => p.CustomerCode).Title("Customer Code");
+                                                   columns.Bound(p => p.Id).Title("شناسه");
+                                                   columns.Bound(p => p.OrderCode).Title("Order Code");
+                                                   columns.Bound(p => p.OrderDate).Title("Order Date");
+                                                   columns.Bound(p => p.Customer_Ref).Title("Customer ID");
+                                                   columns.Bound(p => p.CustomerCode).Title("Customer Code");
 
 
 
-                               })
-                               .Pageable()
-                               .Navigatable()
-                               .Selectable()
-                               .Sortable()
-                               .Scrollable()
-                               .Filterable()
-                               .Events(events => events.Change("OnRowSelect"))
-                               .DataSource(dataSource => dataSource
-                                    .Ajax()
-                                   .Batch(true)
-                                   .PageSize(20)
-                                   .ServerOperation(false)
-                                   .Model(model => model.Id(order => order.Id))
-                                   .Read(read => read.Action("FillGrid", "Order"))
-                             )
+                                               })
+                                               .Pageable()
+                                               .Navigatable()
+                                               .Selectable()
+                                               .Sortable()
+                                               .Scrollable()
+                                               .Filterable()
+                                               .Events(events => events.Change("OnRowSelect"))
+                                               .DataSource(dataSource => dataSource
+                                                    .Ajax()
+                                                   .Batch(true)
+                                                   .PageSize(20)
+                                                   .ServerOperation(false)
+                                                   .Model(model => model.Id(order => order.Id))
+                                                   .Read(read => read.Action("FillGrid", "Order"))
+                                             )
     )
 
 </div>
 
 <div class="row kendoGrid">
     @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.Helper.OrderHelper>()
-    .Name("OrderDetailsGrid")
+                    .Name("OrderDetailsGrid")
     )
 
 </div>
@@ -111,74 +168,105 @@
 
     var ref_Order = {};
     var selectedCustomer_RefID = 0;
-    var orderDetails = 
-    
-        [
-            { UnitPrice: 3, Discount: 89, TaxRate: 90, Quantity: 8, Product_Ref: 18 },
-            { UnitPrice: 3, Discount: 89, TaxRate: 90, Quantity: 8, Product_Ref: 18 },
-        ];
+    //var orderDetails =
+
+    //    [
+    //        { UnitPrice: 3, Discount: 89, TaxRate: 90, Quantity: 8, Product_Ref: 18 },
+    //        { UnitPrice: 3, Discount: 89, TaxRate: 90, Quantity: 8, Product_Ref: 18 },
+    //    ];
     //$(document).ready(function () {
     //    $("#date").datepicker({ dateFormat: 'dd/mm/yy' });
     //});
 
-            //************** Save ********************
+    var orderDetails = [];
+
+    $("#btnAdd").click(function () {
+
+        orderDetails.push({
+            UnitPrice: parseFloat($('#unitPrice').val().trim()),
+            Discount: parseFloat($('#discount').val().trim()),
+            TaxRate: parseFloat($('#taxRate').val().trim()),
+            Quantity: parseInt($('#quantity').val().trim()),
+            Product_Ref: parseInt($('#product_ref').val().trim())
+        });
+
+        //Clear fields
+        $('#unitPrice').val('').focus();
+        $('#discount,#taxRate,#quantity,#product_ref').val('');
+    });
+
+    //************** Save ********************
     $("#btnSave").click(function () {
-        alert(orderDetails[1].UnitPrice);
+        //alert(orderDetails[1].UnitPrice);
         // var orderDetailsGrid = $("#OrderDetailsGrid").data("kendoGrid").dataSource.data;
 
         //  alert(JSON.stringify({ griditems: orderDetailsGrid.dataSource.view() }));
-        
+
 
         // var dataToSend = [{ fieldname: 'ABC' }, { fieldname: 'DEF' }];
-        //var orderDetails1 = JSON.stringify(orderDetails);    
-        
+        //var orderDetails1 = JSON.stringify(orderDetails);
+
         var datetimepicker = $("#date").kendoDatePicker({
             value: new Date(),
             min: new Date(2019, 0, 1),
             max: new Date()
         });
-        ref_Order = {
 
-                OrderCode: $('#code').val(),
+        //ref_Order = {
+
+        //    OrderCode: $('#code').val(),
+
+        //    OrderDate: datetimepicker,
+
+        //    Customer_Ref: $('#customer_ref').val(),
+
+
+        //};
+
+        //var  ref_Order1 = JSON.stringify(ref_Order );
+        // var orderDetails1 = JSON.stringify( orderDetails );
+
+        var data = {
+            OrderCode: $('#code').val(),
 
             OrderDate: datetimepicker,
 
-                Customer_Ref: $('#customer_ref').val(),
+            Customer_Ref: $('#customer_ref').val(),
 
+            OrderDetails: orderDetails
+        }
 
-        };
         
-      //var  ref_Order1 = JSON.stringify(ref_Order );
-      // var orderDetails1 = JSON.stringify( orderDetails );
 
         $.ajax({
+            url: '/Order/Create',
+            type: "POST",
+            data: JSON.stringify(data),
+            dataType: "JSON",
+            contentType: "application/json",
+            success: function (d) {
+                //check is successfully save to database 
+                if (d.status == true) {
+                    //will send status from server side
+                    alert('Successfully done.');
+                    //clear form
+                    orderDetails = [];
+                    $('#code').val('');
+                    $('#date').val('');
+                    $('#customer_ref').val('');
+                }
+                else {
+                    alert('Failed');
+                }
+                //$('#submit').val('Save');
+            },
+            error: function () {
+                alert('Error. Please try again.');
+               // $('#submit').val('Save');
+            }
+        });
 
-            url: "/Order/Create/" + ref_Order + orderDetails,
-
-          //  data: { json_1: $.toJSON(ref_Order), json_2: $.toJSON(orderDetails) },
-
-                    type: "POST",
-
-                    contentType: "application/json;charset=utf-8",
-
-                    dataType: "json",
-
-                    success: function (result) {
-
-                        //location.reload();
-                        alert("Save is done!");
-
-                    },
-
-                    error: function (errormessage) {
-
-                        
-                        alert(errormessage.responseText);
-
-                    }
-
-                });
-    })
+    });
 
     //************** Delete ********************
     $("#btnDelete").click(function () {
@@ -223,7 +311,7 @@
 
 
 
-       // OrderDetailsGrid
+        // OrderDetailsGrid
         //var orderDetails = [
         //    {  UnitPrice: 3, Discount: 89, TaxRate: 90, Quantity: 8, Product_Ref: 18,  }
         //    , {  UnitPrice: 6, Discount: 99, TaxRate: 88, Quantity: 9, Product_Ref: 18 }
@@ -238,19 +326,19 @@
         //    filterable: true
         //    , columns:
         //        [
-                   
+
         //            { field: "UnitPrice", title: "UnitPrice" }
         //            , { field: "Discount", title: "Discount" }
         //            , { field: "TaxRate", title: "TaxRate" }
         //            , { field: "Quantity", title: "Quantity" }
         //            , { field: "Product_Ref", title: "Product_Ref" }
-                   
-                    
+
+
         //            ]
         //    , dataSource: { data: orderDetails, pageSize: 10 } //binding JSON data with grid
 
         //});
-  
+
     }
     //***
     //OnComboBoxSelect = function (e) {
@@ -269,4 +357,4 @@
     //}
 
 
-    </script>
+</script>

@@ -38,19 +38,40 @@ namespace Sample02.Controllers
         #endregion
 
         #region [- Create() -]
-      [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,OrderCode,OrderDate,Customer_Ref")] Sample02.Models.DomainModels.DTO.EF.OrderMaster orderMaster, List<Sample02.Models.DomainModels.DTO.EF.OrderDetails> orderDetails)
+
+        //public ActionResult Create([Bind(Include = "Id,OrderCode,OrderDate,Customer_Ref")] Sample02.Models.DomainModels.DTO.EF.OrderMaster orderMaster, List<Sample02.Models.DomainModels.DTO.EF.OrderDetails> orderDetails)
+        //{
+
+        //    if (ModelState.IsValid)
+        //    {
+        //        Ref_OrderViewModel.Save(orderMaster,null);
+        //        return RedirectToAction("FillGrid");
+        //    }
+
+        //    return RedirectToAction("FillGrid");
+
+
+        //}
+        [HttpPost]
+        public JsonResult Create(Sample02.Models.ViewModels.OrderViewModel ref_OrderViewModel)
         {
-
-            if (ModelState.IsValid)
-            {
-                Ref_OrderViewModel.Save(orderMaster,null);
-                return RedirectToAction("FillGrid");
-            }
-
-            return RedirectToAction("FillGrid");
-
-
+            bool status = false;
+            //if (ModelState.IsValid)
+            //{
+                Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster = new Models.DomainModels.DTO.EF.OrderMaster();
+                ref_OrderMaster.OrderCode = ref_OrderViewModel.OrderCode;
+                ref_OrderMaster.OrderDate = ref_OrderViewModel.OrderDate;
+                ref_OrderMaster.Customer_Ref = ref_OrderViewModel.Customer_Ref;
+           
+                Ref_OrderViewModel.Save(ref_OrderMaster, ref_OrderViewModel.OrderDetails);
+                    status = true;
+                
+           // }
+            //else
+            //{
+            //    status = false;
+            //}
+            return new JsonResult { Data = new { status = status } };
         }
 
 
