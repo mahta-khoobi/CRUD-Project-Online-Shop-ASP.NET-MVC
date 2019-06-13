@@ -68,24 +68,28 @@ namespace Sample02.Models.DomainModels.POCO
                     #endregion
 
 
-                    // int[] marks = new int[5] { 99, 98, 92, 97, 18 };
-                    //DataTable table = new DataTable();
-                    //table.Columns.Add("UnitPrice", typeof(decimal));
-                    //table.Columns.Add("Discount", typeof(decimal));
-                    //table.Columns.Add("TaxRate", typeof(decimal));
-                    //table.Columns.Add("Quantity", typeof(int));
-                    //table.Columns.Add("Product_Ref", typeof(int));
+                    #region [-DataTable-]
+                    int[] marks = new int[5] { 99, 98, 92, 97, 18 };
+                    DataTable ordeDetailstable = new DataTable();
+                    ordeDetailstable.Columns.Add("UnitPrice", typeof(decimal));
+                    ordeDetailstable.Columns.Add("Discount", typeof(decimal));
+                    ordeDetailstable.Columns.Add("TaxRate", typeof(decimal));
+                    ordeDetailstable.Columns.Add("Quantity", typeof(int));
+                    ordeDetailstable.Columns.Add("Product_Ref", typeof(int));
 
-                    //// Here we add five DataRows.
-                    //foreach (var i in ref_OrderDetails)
-                    //{
-                    //    table.Rows.Add(i);
-                    //}
+                    // Here we add five DataRows.
+                    foreach (Models.DomainModels.DTO.Helper.OrderHelper i in ref_OrderDetails)
+                    {
+                        ordeDetailstable.Rows.Add(i);
+                    }
+                    #endregion
+
+
                     var orderDetails = new SqlParameter()
                     {
                         ParameterName = "@udt_orderDetailsList",
                         SqlDbType = SqlDbType.Structured,
-                        Value = ref_OrderDetails,
+                        Value = ordeDetailstable,
                         TypeName = "dbo.udt_OrderDetailsList"
                     };
 

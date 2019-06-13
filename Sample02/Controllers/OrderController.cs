@@ -62,6 +62,7 @@ namespace Sample02.Controllers
                 ref_OrderMaster.OrderCode = ref_OrderViewModel.OrderCode;
                 ref_OrderMaster.OrderDate = ref_OrderViewModel.OrderDate;
                 ref_OrderMaster.Customer_Ref = ref_OrderViewModel.Customer_Ref;
+                
            
                 Ref_OrderViewModel.Save(ref_OrderMaster, ref_OrderViewModel.OrderDetails);
                     status = true;
