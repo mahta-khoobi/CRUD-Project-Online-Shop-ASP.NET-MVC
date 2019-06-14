@@ -12,12 +12,13 @@ namespace Sample02.Models.ViewModels
         public OrderViewModel()
         {
             Ref_OrderCrud = new DomainModels.POCO.OrderCrud();
+            OrderDetail_Ref = new DomainModels.DTO.Helper.OrderHelper();
         }
         #endregion
 
         #region [-props for class-]
         public Models.DomainModels.POCO.OrderCrud Ref_OrderCrud { get; set; }
-        public Models.DomainModels.DTO.EF.OrderMaster Ref_OrderMaster { get; set; }
+     //   public Models.DomainModels.DTO.EF.OrderMaster Ref_OrderMaster { get; set; }
         #endregion
 
         #region [-props for model-]
@@ -25,9 +26,9 @@ namespace Sample02.Models.ViewModels
         public int OrderCode { get; set; }
         public System.DateTime OrderDate { get; set; }
         public int Customer_Ref { get; set; }
-        // public int CustomerCode { get; set; }
+
         public Models.DomainModels.DTO.Helper.OrderHelper OrderDetail_Ref { get; set; }
-        public IEnumerable<Models.DomainModels.DTO.Helper.OrderHelper> OrderDetails { get; set; }
+        public List<Models.DomainModels.DTO.Helper.OrderHelper> OrderDetails { get; set; }
         #endregion
 
         #region [-FillGrid()-]
@@ -37,8 +38,8 @@ namespace Sample02.Models.ViewModels
         }
         #endregion
 
-        #region [-Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, ICollection<Models.DomainModels.DTO.EF.OrderDetails> orderDetails)-]
-        public void Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, IEnumerable<Models.DomainModels.DTO.Helper.OrderHelper> orderDetails)
+        #region [-Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, List<Models.DomainModels.DTO.EF.OrderDetails> orderDetails)-]
+        public void Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, List<Models.DomainModels.DTO.Helper.OrderHelper> orderDetails)
         {
            
             Ref_OrderCrud.Insert(ref_OrderMaster, orderDetails);

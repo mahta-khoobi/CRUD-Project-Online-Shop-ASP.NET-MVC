@@ -43,64 +43,40 @@ namespace Sample02.Models.DomainModels.POCO
         }
         #endregion
 
-        #region [-Insert(DomainModels.DTO.EF.OrderMaster ref_OrderMaster,ICollection<Models.DomainModels.DTO.EF.OrderDetails> ref_OrderDetails)-]
-        public void Insert(DomainModels.DTO.EF.OrderMaster ref_OrderMaster, IEnumerable<Models.DomainModels.DTO.Helper.OrderHelper> ref_OrderDetails)
+        #region [-Insert(DomainModels.DTO.EF.OrderMaster ref_OrderMaster,List<Models.DomainModels.DTO.EF.OrderDetails> ref_OrderDetails)-]
+        public void Insert(DomainModels.DTO.EF.OrderMaster ref_OrderMaster, List<Models.DomainModels.DTO.Helper.OrderHelper> ref_OrderDetails)
         {
             using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
             {
                 try
-                {
-                    #region [ADO]
-                    // // ref_OrderDetails.ForEach(x => orderDetails.Rows.Add(x));    
-                    // SqlConnection sqlconn = new SqlConnection(context.Database.Connection.ConnectionString);
-                    // SqlCommand command = new SqlCommand("dbo.usp_OrderMasterDetails_Insert", sqlconn);
-                    // command.CommandType = CommandType.StoredProcedure;
-                    // command.Parameters.AddWithValue("@udt_orderDetailsList", ref_OrderDetails);
-                    //// command.Parameters.AddWithValue("@idMaster",ref_OrderMaster.Id);
-                    // command.Parameters.AddWithValue("@orderDate", ref_OrderMaster.OrderDate);
-                    // command.Parameters.AddWithValue("@customer_Ref", ref_OrderMaster.Customer_Ref);
+                { 
 
-                    // sqlconn.Open();
-                    // command.ExecuteNonQuery();
-                    // context.SaveChanges();
-                    // sqlconn.Close();
-                    // context.SaveChanges(); 
-                    #endregion
-
-
-                    #region [-DataTable-]
-                    int[] marks = new int[5] { 99, 98, 92, 97, 18 };
-                    DataTable ordeDetailstable = new DataTable();
-                    ordeDetailstable.Columns.Add("UnitPrice", typeof(decimal));
-                    ordeDetailstable.Columns.Add("Discount", typeof(decimal));
-                    ordeDetailstable.Columns.Add("TaxRate", typeof(decimal));
-                    ordeDetailstable.Columns.Add("Quantity", typeof(int));
-                    ordeDetailstable.Columns.Add("Product_Ref", typeof(int));
-
-                    // Here we add five DataRows.
-                    foreach (Models.DomainModels.DTO.Helper.OrderHelper i in ref_OrderDetails)
+                    DataTable orderDetailsTable = new DataTable();
+                    orderDetailsTable.Columns.Add("UnitPrice", typeof(decimal));
+                    orderDetailsTable.Columns.Add("Discount", typeof(decimal));
+                    orderDetailsTable.Columns.Add("TaxRate", typeof(decimal));
+                    orderDetailsTable.Columns.Add("Quantity", typeof(Int32));
+                    orderDetailsTable.Columns.Add("Product_Ref", typeof(Int32));
+                    for (int i = 0; i < ref_OrderDetails.Count; i++)
                     {
-                        ordeDetailstable.Rows.Add(i);
+                        orderDetailsTable.Rows.Add(Convert.ToDecimal(ref_OrderDetails[i].UnitPrice), Convert.ToDecimal(ref_OrderDetails[i].Discount), Convert.ToDecimal(ref_OrderDetails[i].TaxRate), Convert.ToInt32(ref_OrderDetails[i].Quantity), Convert.ToInt32(ref_OrderDetails[i].Product_Ref));
                     }
-                    #endregion
-
-
                     var orderDetails = new SqlParameter()
                     {
                         ParameterName = "@udt_orderDetailsList",
                         SqlDbType = SqlDbType.Structured,
-                        Value = ordeDetailstable,
+                        Value = orderDetailsTable,
                         TypeName = "dbo.udt_OrderDetailsList"
                     };
 
                     var orderDate = new SqlParameter("@orderDate", SqlDbType.DateTime);
-                    orderDate.Value = DateTime.Now;
+                    orderDate.Value = ref_OrderMaster.OrderDate;
 
                     var orderCode = new SqlParameter("@orderCode", SqlDbType.Int);
-                    orderCode.Value = 39;
+                    orderCode.Value = ref_OrderMaster.OrderCode;
 
                     var ref_Customer = new SqlParameter("@customer_Ref", SqlDbType.Int);
-                    ref_Customer.Value = 11;
+                    ref_Customer.Value = ref_OrderMaster.Customer_Ref;
 
                     context.Database.ExecuteSqlCommand("exec dbo.usp_OrderMasterDetails_Insert @orderCode,@udt_orderDetailsList,@orderDate,@customer_Ref",
                         orderCode, orderDetails, orderDate, ref_Customer);

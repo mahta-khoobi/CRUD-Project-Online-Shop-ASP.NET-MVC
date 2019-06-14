@@ -38,11 +38,10 @@
         <div class="form-group">
             @Html.LabelFor(model => model.OrderDate, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @(Html.Kendo().DatePicker()
-                                      .Name("date")
-                                      .Min(new DateTime(1900, 1, 1))
-                                      .Max(new DateTime(2099, 12, 31))
-                                      .Value(DateTime.Today) //Set the value of the DatePicker.
+               @(Html.Kendo().DateTimePicker()
+                .Name("date") //The name of the DateTimePicker is mandatory. It specifies the "id" attribute of the widget.
+          
+                .Value(DateTime.Now) //Set the value of the DateTimePicker.
                 )
                 @Html.ValidationMessageFor(model => model.OrderDate, "", new { @class = "text-danger" })
             </div>
@@ -216,20 +215,12 @@
     $("#btnSave").click(function () {
         
 
-        var datetimepicker = $("#date").kendoDatePicker({
-            value: new Date(),
-            min: new Date(2019, 0, 1),
-            max: new Date()
-        });
-
-
-
         var data = {
-            OrderCode: $('#code').val(),
+            OrderCode: parseInt($('#code').val()),
 
-            OrderDate: datetimepicker,
+            OrderDate: $('#date').val(),
 
-            Customer_Ref: $('#customer_ref').val(),
+            Customer_Ref: parseInt($('#customer_ref').val()),
 
             OrderDetails: orderDetails
         }
