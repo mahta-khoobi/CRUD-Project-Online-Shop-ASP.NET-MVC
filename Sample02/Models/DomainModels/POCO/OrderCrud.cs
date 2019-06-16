@@ -129,9 +129,37 @@ namespace Sample02.Models.DomainModels.POCO
 
                 }
             }
+        #endregion
+
+        #region [-SelectOrderDetailsGivenOrdeMasterId(DomainModels.DTO.EF.OrderMaster ref_OrderMaster)-]
+        public List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> SelectOrderDetailsGivenOrdeMasterId(int id)
+        {
+
+            using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
+            {
+                try
+                {
+                    var q = context.usp_GetOrderDetailsGivenOrderMasterId(id).ToList();
+                    return q;
+
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+                finally
+                {
+
+                }
+            }
         }
         #endregion
 
-
-
     }
+
+
+
+
+
+}

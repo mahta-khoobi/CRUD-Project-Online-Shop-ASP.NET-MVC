@@ -18,8 +18,12 @@ namespace Sample02.Controllers
         }
 
         #endregion
+
+        #region [-props-]
         public Sample02.Models.ViewModels.OrderViewModel Ref_OrderViewModel { get; set; }
-        // GET: Order
+        #endregion
+
+        #region [-Actions-]
         #region [-Order()-]
         public ActionResult Order()
         {
@@ -38,39 +42,38 @@ namespace Sample02.Controllers
         }
         #endregion
 
+        #region [- FillOrderDetailsGrid([DataSourceRequest] DataSourceRequest request, int id) -]
+        public JsonResult FillOrderDetailsGrid([DataSourceRequest] DataSourceRequest request, int id)
+        {
+
+
+            List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> q = Ref_OrderViewModel.GetOrderDetailsGrid(id);
+
+            return Json(q.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+
+        } 
+        #endregion
+
         #region [- Create() -]
 
-        //public ActionResult Create([Bind(Include = "Id,OrderCode,OrderDate,Customer_Ref")] Sample02.Models.DomainModels.DTO.EF.OrderMaster orderMaster, List<Sample02.Models.DomainModels.DTO.EF.OrderDetails> orderDetails)
-        //{
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        Ref_OrderViewModel.Save(orderMaster,null);
-        //        return RedirectToAction("FillGrid");
-        //    }
-
-        //    return RedirectToAction("FillGrid");
-
-
-        //}
         [HttpPost]
         public JsonResult Create([Bind(Include = "Id,OrderCode,OrderDate,Customer_Ref,OrderDetails,OrderDetail_Ref,Ref_OrderCrud")] Sample02.Models.ViewModels.OrderViewModel ref_OrderViewModel)
         {
 
             bool status = false;
-                Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster = new Models.DomainModels.DTO.EF.OrderMaster();
-                ref_OrderMaster.OrderCode = ref_OrderViewModel.OrderCode;
-                ref_OrderMaster.OrderDate = ref_OrderViewModel.OrderDate;
-                ref_OrderMaster.Customer_Ref = ref_OrderViewModel.Customer_Ref;
+            Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster = new Models.DomainModels.DTO.EF.OrderMaster();
+            ref_OrderMaster.OrderCode = ref_OrderViewModel.OrderCode;
+            ref_OrderMaster.OrderDate = ref_OrderViewModel.OrderDate;
+            ref_OrderMaster.Customer_Ref = ref_OrderViewModel.Customer_Ref;
 
 
 
             Ref_OrderViewModel.Save(ref_OrderMaster, ref_OrderViewModel.OrderDetails);
             status = true;
-               
 
-            
-            
+
+
+
             return new JsonResult { Data = new { status = status } };
         }
 
@@ -92,6 +95,7 @@ namespace Sample02.Controllers
             }
 
         }
+        #endregion 
         #endregion
     }
 }

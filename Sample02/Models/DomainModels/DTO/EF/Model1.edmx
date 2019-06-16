@@ -26,7 +26,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="UnitPrice" Type="money" Nullable="false" />
+          <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Discount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TaxRate" Type="decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Quantity" Type="int" Nullable="false" />
@@ -110,6 +110,12 @@
           </ReferentialConstraint>
         </Association>
         <Function Name="usp_Customer_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="usp_GenerateCodeForOrder" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="orderCode" Type="int" Mode="InOut" />
+        </Function>
+        <Function Name="usp_GetOrderDetailsGivenOrderMasterId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="orderMasterId" Type="int" Mode="In" />
+        </Function>
         <Function Name="usp_OrderMaster_Select" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="usp_OrderMasterDetails_Delete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="id" Type="int" Mode="In" />
@@ -165,7 +171,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="UnitPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="TaxRate" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
           <Property Name="Quantity" Type="Int32" Nullable="false" />
@@ -272,6 +278,12 @@
           <FunctionImport Name="usp_OrderMasterDetails_Delete">
           <Parameter Name="id" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="usp_GenerateCodeForOrder">
+            <Parameter Name="orderCode" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GetOrderDetailsGivenOrderMasterId" ReturnType="Collection(OnlineShopModel.usp_GetOrderDetailsGivenOrderMasterId_Result)">
+            <Parameter Name="orderMasterId" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="usp_Customer_Select_Result">
           <Property Type="Int32" Name="Id" Nullable="false" />
@@ -318,6 +330,16 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <ComplexType Name="usp_GetOrderDetailsGivenOrderMasterId_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="Decimal" Name="UnitPrice" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="Discount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TaxRate" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Int32" Name="Quantity" Nullable="false" />
+          <Property Type="Int32" Name="Product_Ref" Nullable="false" />
+          <Property Type="Int32" Name="OrderMaster_Ref" Nullable="false" />
+          <Property Type="Int32" Name="ProductCode" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -435,6 +457,21 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="usp_OrderMasterDetails_Delete" FunctionName="OnlineShopModel.Store.usp_OrderMasterDetails_Delete" />
+          <FunctionImportMapping FunctionImportName="usp_GenerateCodeForOrder" FunctionName="OnlineShopModel.Store.usp_GenerateCodeForOrder" />
+          <FunctionImportMapping FunctionImportName="usp_GetOrderDetailsGivenOrderMasterId" FunctionName="OnlineShopModel.Store.usp_GetOrderDetailsGivenOrderMasterId">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="OnlineShopModel.usp_GetOrderDetailsGivenOrderMasterId_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="TaxRate" ColumnName="TaxRate" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Product_Ref" ColumnName="Product_Ref" />
+                <ScalarProperty Name="OrderMaster_Ref" ColumnName="OrderMaster_Ref" />
+                <ScalarProperty Name="ProductCode" ColumnName="ProductCode" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

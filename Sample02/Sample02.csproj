@@ -239,6 +239,9 @@
     <Compile Include="Models\DomainModels\DTO\EF\usp_Customer_Select_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DomainModels\DTO\EF\usp_GetOrderDetailsGivenOrderMasterId_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DomainModels\DTO\EF\usp_OrderMaster_Select_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

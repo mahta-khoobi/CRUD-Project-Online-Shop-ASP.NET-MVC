@@ -18,7 +18,7 @@ namespace Sample02.Models.ViewModels
 
         #region [-props for class-]
         public Models.DomainModels.POCO.OrderCrud Ref_OrderCrud { get; set; }
-     //   public Models.DomainModels.DTO.EF.OrderMaster Ref_OrderMaster { get; set; }
+
         #endregion
 
         #region [-props for model-]
@@ -51,7 +51,15 @@ namespace Sample02.Models.ViewModels
         {
             
             Ref_OrderCrud.Remove(id);
-        } 
+        }
+        #endregion
+
+        #region [-GetOrderDetailsGrid(int id)-]
+        public List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> GetOrderDetailsGrid(int id)
+        {
+     
+            return Ref_OrderCrud.SelectOrderDetailsGivenOrdeMasterId(id);
+        }
         #endregion
 
     }

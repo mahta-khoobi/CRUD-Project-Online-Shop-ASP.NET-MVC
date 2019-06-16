@@ -61,5 +61,19 @@ namespace Sample02.Models.DomainModels.DTO.EF
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_OrderMasterDetails_Delete", idParameter);
         }
+    
+        public virtual int usp_GenerateCodeForOrder(ObjectParameter orderCode)
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_GenerateCodeForOrder", orderCode);
+        }
+    
+        public virtual ObjectResult<usp_GetOrderDetailsGivenOrderMasterId_Result> usp_GetOrderDetailsGivenOrderMasterId(Nullable<int> orderMasterId)
+        {
+            var orderMasterIdParameter = orderMasterId.HasValue ?
+                new ObjectParameter("orderMasterId", orderMasterId) :
+                new ObjectParameter("orderMasterId", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetOrderDetailsGivenOrderMasterId_Result>("usp_GetOrderDetailsGivenOrderMasterId", orderMasterIdParameter);
+        }
     }
 }
