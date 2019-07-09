@@ -13,7 +13,7 @@ namespace Sample02.Models.DomainModels.DTO.EF
     
     public partial class usp_GetOrderDetailsGivenOrderMasterId_Result
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public decimal UnitPrice { get; set; }
         public decimal Discount { get; set; }
         public decimal TaxRate { get; set; }

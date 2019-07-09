@@ -43,14 +43,19 @@ namespace Sample02.Controllers
         #endregion
 
         #region [- FillOrderDetailsGrid([DataSourceRequest] DataSourceRequest request, int id) -]
-        public JsonResult FillOrderDetailsGrid([DataSourceRequest] DataSourceRequest request, int id)
+     
+        public JsonResult FillOrderDetailsGrid([DataSourceRequest] DataSourceRequest request, int? id)
         {
+            List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> q = null; 
+            if (id != null)
+            {
+                // Ref_OrderViewModel.Id = id;
+               q = Ref_OrderViewModel.GetOrderDetailsGrid(id);
 
-
-            List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> q = Ref_OrderViewModel.GetOrderDetailsGrid(id);
-
+                
+            }
+            //return new JsonResult { };
             return Json(q.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-
         } 
         #endregion
 

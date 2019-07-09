@@ -55,7 +55,7 @@ namespace Sample02.Models.ViewModels
         #endregion
 
         #region [-GetOrderDetailsGrid(int id)-]
-        public List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> GetOrderDetailsGrid(int id)
+        public List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> GetOrderDetailsGrid(int? id)
         {
      
             return Ref_OrderCrud.SelectOrderDetailsGivenOrdeMasterId(id);

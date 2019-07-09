@@ -71,7 +71,7 @@ namespace Sample02.Models.DomainModels.DTO.EF
         {
             var orderMasterIdParameter = orderMasterId.HasValue ?
                 new ObjectParameter("orderMasterId", orderMasterId) :
-                new ObjectParameter("orderMasterId", typeof(int));
+                new ObjectParameter("orderMasterId", typeof(int?));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<usp_GetOrderDetailsGivenOrderMasterId_Result>("usp_GetOrderDetailsGivenOrderMasterId", orderMasterIdParameter);
         }

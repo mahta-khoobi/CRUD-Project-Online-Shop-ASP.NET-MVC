@@ -132,13 +132,15 @@ namespace Sample02.Models.DomainModels.POCO
         #endregion
 
         #region [-SelectOrderDetailsGivenOrdeMasterId(DomainModels.DTO.EF.OrderMaster ref_OrderMaster)-]
-        public List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> SelectOrderDetailsGivenOrdeMasterId(int id)
+        public List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> SelectOrderDetailsGivenOrdeMasterId(int? id)
         {
 
             using (var context = new DomainModels.DTO.EF.OnlineShopEntities())
             {
                 try
                 {
+
+                    context.Configuration.ProxyCreationEnabled = false;
                     var q = context.usp_GetOrderDetailsGivenOrderMasterId(id).ToList();
                     return q;
 
