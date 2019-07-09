@@ -7,12 +7,25 @@ namespace Sample02.Models.ViewModels
 {
     public class ProductCategoryViewModel
     {
-        #region [-ctor-]
+
+    #region [-ctor-]
         public ProductCategoryViewModel()
         {
-            Ref_ProductCategoryCrud = new Models.DomainModels.POCO.ProductCategoryCrud();
+            Ref_ProductCategoryCrud = new DomainModels.POCO.ProductCategoryCrud();
+            Ref_UnitOfWork = new Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, int>(new DomainModels.POCO.ProductCategoryRepository(new DomainModels.DTO.EF.OnlineShopEntities()));
         }
-        #endregion
+    
+    #endregion
+    public Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, System.Int32> Ref_UnitOfWork { get; set; }
+
+    #region [-Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)-]
+    public void Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
+    {
+        Ref_UnitOfWork.Ref_IUnitOfWork.Create(ref_ProductCategory);
+    }
+    #endregion
+
+
 
         #region [-props for class-]
         public Models.DomainModels.DTO.EF.ProductCategory Ref_ProductCateory { get; set; }
@@ -25,12 +38,12 @@ namespace Sample02.Models.ViewModels
         public string CategoryName { get; set; }
         #endregion
 
-        #region [- Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory) -]
-        public void Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
-        {
-            Ref_ProductCategoryCrud.Insert(ref_ProductCategory);
-        }
-        #endregion
+        //#region [- Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory) -]
+        //public void Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
+        //{
+        //    Ref_ProductCategoryCrud.Insert(ref_ProductCategory);
+        //}
+        //#endregion
 
         #region [- FillGrid() -]
         public dynamic FillGrid() //goftim dynamic k moshkele view dar refresh hal shavad va lazem nist list bargardanad
@@ -54,7 +67,7 @@ namespace Sample02.Models.ViewModels
         public void Edit(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
         {
            
-            Ref_ProductCategoryCrud.Update(ref_ProductCategory);
+            Ref_UnitOfWork.Ref_IUnitOfWork.Update(ref_ProductCategory);
 
         }
         #endregion

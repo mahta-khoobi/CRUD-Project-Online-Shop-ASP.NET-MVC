@@ -75,6 +75,7 @@ namespace Sample02.Controllers
         {
             if (ModelState.IsValid)
             {
+
                 Ref_ProductCategoryViewModel.Edit(productCategory);
                 return RedirectToAction("ProductCategory");
             }

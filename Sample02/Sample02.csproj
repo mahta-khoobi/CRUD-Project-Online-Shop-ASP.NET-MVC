@@ -254,6 +254,7 @@
     <Compile Include="Models\DomainModels\DTO\Helper\OrderHelper.cs" />
     <Compile Include="Models\DomainModels\POCO\OrderCrud.cs" />
     <Compile Include="Models\DomainModels\POCO\ProductCategoryCrud.cs" />
+    <Compile Include="Models\DomainModels\POCO\ProductCategoryRepository.cs" />
     <Compile Include="Models\DomainModels\POCO\ProductCrud.cs" />
     <Compile Include="Models\Framework\Abstract\IRepository.cs" />
     <Compile Include="Models\Framework\Abstract\IUnitOfWork.cs" />
