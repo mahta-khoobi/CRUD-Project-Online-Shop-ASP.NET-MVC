@@ -255,6 +255,10 @@
     <Compile Include="Models\DomainModels\POCO\OrderCrud.cs" />
     <Compile Include="Models\DomainModels\POCO\ProductCategoryCrud.cs" />
     <Compile Include="Models\DomainModels\POCO\ProductCrud.cs" />
+    <Compile Include="Models\Framework\Abstract\IRepository.cs" />
+    <Compile Include="Models\Framework\Abstract\IUnitOfWork.cs" />
+    <Compile Include="Models\Framework\Base\BaseRepository.cs" />
+    <Compile Include="Models\Framework\Base\UnitOfWork.cs" />
     <Compile Include="Models\ViewModels\OrderViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductViewModel.cs" />
