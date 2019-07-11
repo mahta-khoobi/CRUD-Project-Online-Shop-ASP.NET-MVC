@@ -26,6 +26,7 @@ namespace Sample02.Models.Framework.Base
         #endregion
 
         #region [-Methods-]
+
         #region [-Create(T_Entity entity)-]
         public virtual void Create(T_Entity entity)
         {
@@ -105,6 +106,7 @@ namespace Sample02.Models.Framework.Base
             }
         }
         #endregion 
+
         #endregion
 
         #region [-Save()-]

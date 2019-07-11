@@ -14,20 +14,11 @@ namespace Sample02.Models.ViewModels
             Ref_ProductCategoryCrud = new DomainModels.POCO.ProductCategoryCrud();
             Ref_UnitOfWork = new Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, int>(new DomainModels.POCO.ProductCategoryRepository(new DomainModels.DTO.EF.OnlineShopEntities()));
         }
-    
-    #endregion
-    public Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, System.Int32> Ref_UnitOfWork { get; set; }
 
-    #region [-Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)-]
-    public void Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
-    {
-        Ref_UnitOfWork.Ref_IUnitOfWork.Create(ref_ProductCategory);
-    }
-    #endregion
-
-
+        #endregion
 
         #region [-props for class-]
+        public Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, System.Int32> Ref_UnitOfWork { get; set; }
         public Models.DomainModels.DTO.EF.ProductCategory Ref_ProductCateory { get; set; }
         public Models.DomainModels.POCO.ProductCategoryCrud Ref_ProductCategoryCrud { get; set; }
         #endregion
@@ -38,17 +29,19 @@ namespace Sample02.Models.ViewModels
         public string CategoryName { get; set; }
         #endregion
 
-        //#region [- Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory) -]
-        //public void Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
-        //{
-        //    Ref_ProductCategoryCrud.Insert(ref_ProductCategory);
-        //}
-        //#endregion
+        #region [-Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)-]
+        public void Save(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
+    {
+        Ref_UnitOfWork.Ref_IUnitOfWork.Create(ref_ProductCategory);
+    }
+        #endregion
 
-        #region [- FillGrid() -]
-        public dynamic FillGrid() //goftim dynamic k moshkele view dar refresh hal shavad va lazem nist list bargardanad
+        #region [- Edit(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory) -]
+        public void Edit(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
         {
-            return Ref_ProductCategoryCrud.SelectAll();
+
+            Ref_UnitOfWork.Ref_IUnitOfWork.Update(ref_ProductCategory);
+
         }
         #endregion
 
@@ -57,26 +50,24 @@ namespace Sample02.Models.ViewModels
         {
             Ref_ProductCateory = new Models.DomainModels.DTO.EF.ProductCategory();
             Ref_ProductCateory.Id = id;
-            Ref_ProductCategoryCrud.Remove(Ref_ProductCateory);
+            Ref_UnitOfWork.Ref_IUnitOfWork.Delete(Ref_ProductCateory);
 
         }
 
         #endregion
 
-        #region [- Edit(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory) -]
-        public void Edit(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
+        #region [-GetRecord(int id)-]
+        public Models.DomainModels.DTO.EF.ProductCategory GetRecord(int id)
         {
-           
-            Ref_UnitOfWork.Ref_IUnitOfWork.Update(ref_ProductCategory);
-
+            return Ref_UnitOfWork.Ref_IUnitOfWork.FindById(id);
         }
         #endregion
 
-        #region [-GetRecord(int? id)-]
-        public Models.DomainModels.DTO.EF.ProductCategory GetRecord(int? id)
+        #region [- FillGrid() -]
+        public dynamic FillGrid() //goftim dynamic k moshkele view dar refresh hal shavad va lazem nist list bargardanad
         {
-            return Ref_ProductCategoryCrud.FindRecord(id);
-        } 
+            return Ref_ProductCategoryCrud.SelectAll();
+        }
         #endregion
     }
 }
