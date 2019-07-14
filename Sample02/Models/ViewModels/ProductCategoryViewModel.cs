@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sample02.Models.Helper.SPHelper.ProductCategory;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,13 +13,13 @@ namespace Sample02.Models.ViewModels
         public ProductCategoryViewModel()
         {
             Ref_ProductCategoryCrud = new DomainModels.POCO.ProductCategoryCrud();
-            Ref_UnitOfWork = new Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, int>(new DomainModels.POCO.ProductCategoryRepository(new DomainModels.DTO.EF.OnlineShopEntities()));
+            Ref_UnitOfWork = new Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, int,CategorySelectHelper>(new DomainModels.POCO.ProductCategoryRepository(new DomainModels.DTO.EF.OnlineShopEntities()));
         }
 
         #endregion
 
         #region [-props for class-]
-        public Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, System.Int32> Ref_UnitOfWork { get; set; }
+        public Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, System.Int32,CategorySelectHelper> Ref_UnitOfWork { get; set; }
         public Models.DomainModels.DTO.EF.ProductCategory Ref_ProductCateory { get; set; }
         public Models.DomainModels.POCO.ProductCategoryCrud Ref_ProductCategoryCrud { get; set; }
         #endregion
@@ -68,6 +69,17 @@ namespace Sample02.Models.ViewModels
         {
             return Ref_ProductCategoryCrud.SelectAll();
         }
+        #endregion
+
+        #region [-FillGridBySP()-]
+        public List<CategorySelectHelper> FillGridBySP()
+        {
+            return Ref_UnitOfWork.Ref_IUnitOfWork.SelectBySP(
+                CategorySPHelper.usp_ProductCategory_Insert,
+                null
+
+                );
+        } 
         #endregion
     }
 }
