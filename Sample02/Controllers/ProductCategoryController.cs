@@ -1,6 +1,7 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Sample02.Models.DomainModels.DTO.EF;
+using Sample02.Models.Helper.SPHelper.ProductCategory;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -42,7 +43,7 @@ namespace Sample02.Controllers
             //DataSourceResult result = productCategory.ToDataSourceResult(request);
 
             //return Json(result,JsonRequestBehavior.AllowGet);
-            IEnumerable<Models.DomainModels.DTO.EF.ProductCategory> q = Ref_ProductCategoryViewModel.FillGrid();
+            IEnumerable<CategorySelectHelper> q = Ref_ProductCategoryViewModel.FillGridBySP();
             //var q = Ref_CategoryViewModel.FillGrid();
              return Json(q.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
 
