@@ -263,6 +263,7 @@
     <Compile Include="Models\Framework\Base\UnitOfWork.cs" />
     <Compile Include="Models\Helper\SPHelper\ProductCategory\CategorySelectHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\ProductCategory\CategorySPHelper.cs" />
+    <Compile Include="Models\Helper\SPHelper\Product\ProductSelectHelper.cs" />
     <Compile Include="Models\ViewModels\OrderViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductCategoryViewModel.cs" />
     <Compile Include="Models\ViewModels\ProductViewModel.cs" />

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Sample02.Models.DomainModels.DTO.EF;
+using Sample02.Models.Helper.SPHelper.Product;
 
 namespace Sample02.Models.ViewModels
 {
@@ -13,7 +14,7 @@ namespace Sample02.Models.ViewModels
         {
             Ref_ProductCrud = new DomainModels.POCO.ProductCrud();
             Ref_ProductCategoryViewModel = new ProductCategoryViewModel();
-            Ref_UnitOfWork = new Framework.Base.UnitOfWork<OnlineShopEntities, Product, int>(new Models.DomainModels.POCO.ProductRepository(new OnlineShopEntities()));
+            Ref_UnitOfWork = new Framework.Base.UnitOfWork<OnlineShopEntities, Product, int, ProductSelectHelper>(new Models.DomainModels.POCO.ProductRepository(new OnlineShopEntities()));
         }
         #endregion
 
@@ -21,7 +22,7 @@ namespace Sample02.Models.ViewModels
 
         public Models.DomainModels.POCO.ProductCrud Ref_ProductCrud { get; set; }
         public Models.ViewModels.ProductCategoryViewModel Ref_ProductCategoryViewModel { get; set; }
-        public Framework.Base.UnitOfWork<OnlineShopEntities, Product, int> Ref_UnitOfWork { get; set; }
+        public Framework.Base.UnitOfWork<OnlineShopEntities, Product, int, ProductSelectHelper> Ref_UnitOfWork { get; set; }
 
         #endregion
 
