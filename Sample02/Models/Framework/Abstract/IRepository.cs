@@ -7,8 +7,11 @@ using System.Threading.Tasks;
 
 namespace Sample02.Models.Framework.Abstract
 {
-    public interface IRepository <K_DBContext, T_Entity, U_PrimaryKey> where T_Entity : class
+    public interface IRepository <K_DBContext, T_Entity, U_PrimaryKey,T_GetHelper> 
+                                                             where T_Entity : class
                                                              where K_DBContext : DbContext
+                                                             where T_GetHelper : class
+
     {
       
             K_DBContext Context { get; set; }
@@ -19,6 +22,8 @@ namespace Sample02.Models.Framework.Abstract
             void Delete(U_PrimaryKey id);
             void Delete(T_Entity entity);
             dynamic Refresh();
+
+            void CrudBySP(string sqlQuery, object[] parameters);
             T_Entity FindById(U_PrimaryKey id);
         }
     }

@@ -45,7 +45,7 @@
     }
         <br />
     <div class="row kendoGrid">
-        @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.ProductCategory>()
+        @(Html.Kendo().Grid((IEnumerable<Sample02.Models.DomainModels.DTO.EF.p>)ViewBag.Products)
                            .Name("ProductCategoryGrid")
                            .Columns(columns =>
                            {
