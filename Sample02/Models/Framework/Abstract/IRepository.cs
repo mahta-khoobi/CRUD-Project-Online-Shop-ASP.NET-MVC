@@ -21,9 +21,11 @@ namespace Sample02.Models.Framework.Abstract
             void Update(T_Entity entity);
             void Delete(U_PrimaryKey id);
             void Delete(T_Entity entity);
-            dynamic Refresh();
+            List<T_Entity> Select();
 
+            List<T_GetHelper> SelectBySP(string sqlQuery, object[] parameters);
             void CrudBySP(string sqlQuery, object[] parameters);
+
             T_Entity FindById(U_PrimaryKey id);
         }
     }
