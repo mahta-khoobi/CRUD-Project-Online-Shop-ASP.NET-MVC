@@ -45,7 +45,7 @@
     }
         <br />
     <div class="row kendoGrid">
-        @(Html.Kendo().Grid((IEnumerable<Sample02.Models.DomainModels.DTO.EF.p>)ViewBag.Products)
+        @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.ProductCategory>()
                            .Name("ProductCategoryGrid")
                            .Columns(columns =>
                            {
@@ -68,7 +68,7 @@
                                .PageSize(20)
                                .ServerOperation(false)
                                .Model(model => model.Id(p => p.Id))
-                               .Read(read => read.Action("FillGrid", "ProductCategory"))
+                               .Read(read => read.Action("FillGridBySP", "ProductCategory"))
                          )
         )
 

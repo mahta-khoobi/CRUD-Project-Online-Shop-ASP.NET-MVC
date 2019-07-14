@@ -79,10 +79,7 @@ namespace Sample02.Models.Framework.Base
             }
         }
 
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+
         #endregion
 
         #region [- Select() -]
@@ -166,6 +163,13 @@ namespace Sample02.Models.Framework.Base
             Context.SaveChanges();
         }
 
+        #endregion
+
+                #region [-Dispose()-]
+        public void Dispose()
+        {
+            Context.Dispose();
+        } 
         #endregion
 
 

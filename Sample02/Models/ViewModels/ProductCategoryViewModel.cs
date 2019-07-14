@@ -1,4 +1,5 @@
-﻿using Sample02.Models.Helper.SPHelper.ProductCategory;
+﻿using Sample02.Models.DomainModels.DTO.EF;
+using Sample02.Models.Helper.SPHelper.ProductCategory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,9 +66,9 @@ namespace Sample02.Models.ViewModels
         #endregion
 
         #region [- FillGrid() -]
-        public dynamic FillGrid() //goftim dynamic k moshkele view dar refresh hal shavad va lazem nist list bargardanad
+        public List<ProductCategory> FillGrid() //goftim dynamic k moshkele view dar refresh hal shavad va lazem nist list bargardanad
         {
-            return Ref_ProductCategoryCrud.SelectAll();
+            return Ref_UnitOfWork.Ref_IUnitOfWork.Select();
         }
         #endregion
 
@@ -75,7 +76,7 @@ namespace Sample02.Models.ViewModels
         public List<CategorySelectHelper> FillGridBySP()
         {
             return Ref_UnitOfWork.Ref_IUnitOfWork.SelectBySP(
-                CategorySPHelper.usp_ProductCategory_Insert,
+                CategorySPHelper.usp_ProductCategory_Select,
                 null
 
                 );

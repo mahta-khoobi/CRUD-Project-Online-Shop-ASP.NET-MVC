@@ -38,14 +38,21 @@ namespace Sample02.Controllers
         #region [- FillGrid([DataSourceRequest] DataSourceRequest request) -]
          public JsonResult FillGrid([DataSourceRequest] DataSourceRequest request)
         {
-            //Models.DomainModels.DTO.EF.OnlineShopEntities db_onlineShop = new OnlineShopEntities();
-            //IQueryable<ProductCategory> productCategory = db_onlineShop.ProductCategory;
-            //DataSourceResult result = productCategory.ToDataSourceResult(request);
 
-            //return Json(result,JsonRequestBehavior.AllowGet);
-            IEnumerable<CategorySelectHelper> q = Ref_ProductCategoryViewModel.FillGridBySP();
-            //var q = Ref_CategoryViewModel.FillGrid();
+            IEnumerable<ProductCategory> q = Ref_ProductCategoryViewModel.FillGrid();
+
              return Json(q.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
+
+        }
+        #endregion
+
+        #region [- FillGridBySP([DataSourceRequest] DataSourceRequest request) -]
+        public JsonResult FillGridBySP([DataSourceRequest] DataSourceRequest request)
+        {
+
+            IEnumerable<CategorySelectHelper> q = Ref_ProductCategoryViewModel.FillGridBySP();
+
+            return Json(q.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
 
         }
         #endregion
