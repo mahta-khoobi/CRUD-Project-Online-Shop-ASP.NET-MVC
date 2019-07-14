@@ -7,9 +7,10 @@ using Sample02.Models.Framework.Abstract;
 
 namespace Sample02.Models.Framework.Base
 {
-    public class BaseRepository<K_DbContext, T_Entity, U_PrimaryKey> : Abstract.IUnitOfWork<K_DbContext, T_Entity, U_PrimaryKey>
+    public class BaseRepository<K_DbContext, T_Entity, U_PrimaryKey, T_ViewHelper> : IUnitOfWork<K_DbContext, T_Entity, U_PrimaryKey, T_ViewHelper>
                                                                      where K_DbContext : DbContext
                                                                      where T_Entity : class
+                                                                     where T_ViewHelper : class
     {
         #region [-ctor-]
         public BaseRepository(K_DbContext context)
@@ -37,18 +38,6 @@ namespace Sample02.Models.Framework.Base
             }
         }
 
-
-        #endregion
-
-        #region [-Refresh()-]
-        public virtual dynamic Refresh()
-        {
-            using (Context)
-            {
-                var q = DbSet.Select(e => e).ToList();
-                return q;
-            }
-        }
 
         #endregion
 
@@ -96,6 +85,68 @@ namespace Sample02.Models.Framework.Base
         }
         #endregion
 
+        #region [- Select() -]
+        public virtual List<T_Entity> Select()
+        {
+            using (Context)
+            {
+                var q = DbSet.Select(e => e).ToList();
+                return q;
+            }
+        }
+        #endregion
+
+        #region [-SelectBySP(string sqlQuery, object[] parameters)-]
+        public virtual List<T_ViewHelper> SelectBySP(string sqlQuery, object[] parameters)
+        {
+            using (Context)
+            {
+                try
+                {
+                    List<T_ViewHelper> list_ViewHelper = new List<T_ViewHelper>();
+                    if(parameters == null)
+                    {
+                        list_ViewHelper = Context.Database.SqlQuery<T_ViewHelper>
+                            (sqlQuery).ToList();
+                    }
+                    else
+                    {
+                        list_ViewHelper = Context.Database.SqlQuery<T_ViewHelper>(sqlQuery, parameters).ToList();
+                    }
+                    return list_ViewHelper;
+                }
+                catch (Exception)
+                {
+                    
+                    throw;
+                }
+                finally
+                {
+                    Dispose();
+                }
+
+            }
+        }
+        #endregion
+
+        #region [-CrudBySP(string sqlQuery, object[] parameters)-]
+        public virtual void CrudBySP(string sqlQuery, object[] parameters)
+        {
+            try
+            {
+                Context.Database.ExecuteSqlCommand(sqlQuery, parameters);
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                Dispose();
+            }
+        } 
+        #endregion
+
         #region [-FindById(U_PrimaryKey id)-]
         public virtual T_Entity FindById(U_PrimaryKey id)
         {
@@ -105,18 +156,19 @@ namespace Sample02.Models.Framework.Base
                 return r;
             }
         }
-        #endregion 
+        #endregion
 
         #endregion
 
-        #region [-Save()-]
-        public void Save()
+        #region [-SaveChanges()-]
+        public void SaveChanges()
         {
             Context.SaveChanges();
-        } 
+        }
+
         #endregion
 
-   
+
 
 
     }

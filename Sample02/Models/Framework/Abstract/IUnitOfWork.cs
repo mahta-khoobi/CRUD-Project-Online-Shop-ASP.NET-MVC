@@ -12,6 +12,6 @@ namespace Sample02.Models.Framework.Abstract
                                                                          where T_Entity : class 
                                                                          where T_ViewHelper : class
     {
-        int SaveChanges();
+        void SaveChanges();
     }
 }
