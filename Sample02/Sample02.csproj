@@ -261,6 +261,8 @@
     <Compile Include="Models\Framework\Abstract\IUnitOfWork.cs" />
     <Compile Include="Models\Framework\Base\BaseRepository.cs" />
     <Compile Include="Models\Framework\Base\UnitOfWork.cs" />
+    <Compile Include="Models\Helper\ModelHelper.cs" />
+    <Compile Include="Models\Helper\SPHelper\ProductCategory\CategorySaveHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\ProductCategory\CategorySelectHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\ProductCategory\CategorySPHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\Product\ProductSelectHelper.cs" />

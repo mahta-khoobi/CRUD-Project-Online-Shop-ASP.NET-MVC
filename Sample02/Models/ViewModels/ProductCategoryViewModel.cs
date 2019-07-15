@@ -38,6 +38,16 @@ namespace Sample02.Models.ViewModels
     }
         #endregion
 
+        #region [-SaveBySP(List<CategorySaveHelper> listCategorySaveHelper)-]
+        public void SaveBySP(List<CategorySaveHelper> listCategorySaveHelper)
+        {
+            Ref_UnitOfWork.Ref_IUnitOfWork.CrudBySP(
+                CategorySPHelper.usp_Category_Insert,
+                CategorySPHelper.SetInsertParameters(listCategorySaveHelper)
+                );
+        } 
+        #endregion
+
         #region [- Edit(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory) -]
         public void Edit(Models.DomainModels.DTO.EF.ProductCategory ref_ProductCategory)
         {

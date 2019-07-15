@@ -7,6 +7,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample01", "Sample01\Sample
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sample02", "Sample02\Sample02.csproj", "{0997C781-8EAE-4959-9B6F-7A592C69F6A6}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLStoredProcedures", "SQLStoredProcedures", "{0FA5C1E2-3BC1-4BF2-AB67-A3853B7F7314}"
+	ProjectSection(SolutionItems) = preProject
+		usp_Category_Insert.sql = usp_Category_Insert.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

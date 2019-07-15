@@ -59,12 +59,14 @@ namespace Sample02.Controllers
 
         #region [- Create() -]
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,CategoryCode,CategoryName")] ProductCategory productCategory)
+        public ActionResult Create([Bind(Include = "Id,CategoryCode,CategoryName")] CategorySaveHelper productCategory)
         {
-
+            List<CategorySaveHelper> listCategory = new List<CategorySaveHelper>();
+            listCategory.Add(productCategory);
             if (ModelState.IsValid)
             {
-                Ref_ProductCategoryViewModel.Save(productCategory);
+                // Ref_ProductCategoryViewModel.Save(productCategory);
+                Ref_ProductCategoryViewModel.SaveBySP(listCategory);
                 return RedirectToAction("ProductCategory");
             }
             else { return View("ProductCategory"); }
