@@ -264,6 +264,7 @@
     <Compile Include="Models\Helper\SPHelper\ProductCategory\CategorySaveHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\ProductCategory\CategorySelectHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\ProductCategory\CategorySPHelper.cs" />
+    <Compile Include="Models\Helper\SPHelper\Product\ProductEditHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\Product\ProductSaveHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\Product\ProductSelectHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\Product\ProductSPHelper.cs" />

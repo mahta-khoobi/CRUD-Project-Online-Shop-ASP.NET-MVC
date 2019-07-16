@@ -68,17 +68,18 @@ namespace Sample02.Controllers
         #region [- Edit() -]
         [HttpPost]
 
-        public ActionResult Edit([Bind(Include = "Id,ProductCode,ProductName,ProductDescription,UnitPrice,Category_Ref")] Product product)
+        public ActionResult Edit([Bind(Include = "Id,ProductCode,ProductName,ProductDescription,UnitPrice,Category_Ref")] ProductEditHelper product)
         {
+            List<ProductEditHelper> listProductInfo = new List<ProductEditHelper>();
+            listProductInfo.Add(product);
+
             if (ModelState.IsValid)
             {
-                Ref_ProductViewModel.Edit(product);
-                return RedirectToAction("FillGrid()");
+                Ref_ProductViewModel.EditBySP(listProductInfo);
+                return RedirectToAction("FillGrid");
             }
-            else
-            {
-                return RedirectToAction("FillGrid()");
-            }
+
+            return RedirectToAction("FillGrid");
         }
         #endregion
 
@@ -88,7 +89,7 @@ namespace Sample02.Controllers
         {
             if (ModelState.IsValid)
             {
-                Ref_ProductViewModel.Delete(id);
+                Ref_ProductViewModel.DeleteBySP(id);
                 return RedirectToAction("FillGrid");
             }
             else

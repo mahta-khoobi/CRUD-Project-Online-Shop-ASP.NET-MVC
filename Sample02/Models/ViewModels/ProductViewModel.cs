@@ -84,12 +84,36 @@ namespace Sample02.Models.ViewModels
 
         #endregion
 
+        #region [-DeleteBySP(int id)-]
+        public void DeleteBySP(int id)
+        {
+
+            Ref_UnitOfWork.Ref_IUnitOfWork.CrudBySP(
+
+                ProductSPHelper.usp_Product_Delete,
+                ProductSPHelper.SetDeleteParameters(id)
+                );
+
+        }
+
+        #endregion
+
         #region [- Edit() -]
         public void Edit(Models.DomainModels.DTO.EF.Product ref_Product)
         {
 
             Ref_UnitOfWork.Ref_IUnitOfWork.Update(ref_Product);
 
+        }
+        #endregion
+
+        #region [-EditBySP(List<ProductEditHelper> listProductEditHelper)-]
+        public void EditBySP(List<ProductEditHelper> listProductEditHelper)
+        {
+            Ref_UnitOfWork.Ref_IUnitOfWork.CrudBySP(
+                ProductSPHelper.usp_Product_Update,
+                ProductSPHelper.SetUpdateParameters(listProductEditHelper)
+                );
         }
         #endregion
 
