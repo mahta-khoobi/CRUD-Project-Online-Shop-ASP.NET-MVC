@@ -36,18 +36,7 @@ namespace Sample02.Controllers
         #endregion
 
         #region [- FillGrid([DataSourceRequest] DataSourceRequest request) -]
-         public JsonResult FillGrid([DataSourceRequest] DataSourceRequest request)
-        {
-
-            IEnumerable<ProductCategory> q = Ref_ProductCategoryViewModel.FillGrid();
-
-             return Json(q.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
-
-        }
-        #endregion
-
-        #region [- FillGridBySP([DataSourceRequest] DataSourceRequest request) -]
-        public JsonResult FillGridBySP([DataSourceRequest] DataSourceRequest request)
+        public JsonResult FillGrid([DataSourceRequest] DataSourceRequest request)
         {
 
             IEnumerable<CategorySelectHelper> q = Ref_ProductCategoryViewModel.FillGridBySP();

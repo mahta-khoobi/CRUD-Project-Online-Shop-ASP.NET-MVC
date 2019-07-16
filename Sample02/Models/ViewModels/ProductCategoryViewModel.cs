@@ -13,7 +13,7 @@ namespace Sample02.Models.ViewModels
     #region [-ctor-]
         public ProductCategoryViewModel()
         {
-            Ref_ProductCategoryCrud = new DomainModels.POCO.ProductCategoryCrud();
+
             Ref_UnitOfWork = new Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, int,CategorySelectHelper>(new DomainModels.POCO.ProductCategoryRepository(new DomainModels.DTO.EF.OnlineShopEntities()));
         }
 
@@ -22,7 +22,7 @@ namespace Sample02.Models.ViewModels
         #region [-props for class-]
         public Framework.Base.UnitOfWork<DomainModels.DTO.EF.OnlineShopEntities, DomainModels.DTO.EF.ProductCategory, System.Int32,CategorySelectHelper> Ref_UnitOfWork { get; set; }
         public Models.DomainModels.DTO.EF.ProductCategory Ref_ProductCateory { get; set; }
-        public Models.DomainModels.POCO.ProductCategoryCrud Ref_ProductCategoryCrud { get; set; }
+
         #endregion
 
         #region [-props for Model-]

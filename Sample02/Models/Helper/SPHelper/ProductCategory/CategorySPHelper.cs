@@ -9,7 +9,8 @@ namespace Sample02.Models.Helper.SPHelper.ProductCategory
     public class CategorySPHelper
     {
         public const string usp_ProductCategory_Select = "[dbo].[usp_ProductCategory_Select]";
-        public const string usp_Category_Insert = "[dbo].[usp_Category_Insert]";
+        public const string usp_Category_Insert = "[dbo].[usp_Category_Insert] @categoryInfo";
+
 
         #region [-SetInsertParameters(List<CategorySelectHelper> listCategorySelectHelper)-]
         public static object[] SetInsertParameters(List<CategorySaveHelper> listCategorySelectHelper)
@@ -19,7 +20,7 @@ namespace Sample02.Models.Helper.SPHelper.ProductCategory
             {
                 ParameterName = "@categoryInfo",
                 SqlDbType = System.Data.SqlDbType.Structured,
-                TypeName = "udt_CategoryInfo",
+                TypeName = "dbo.udt_CategoryInfo",
                 Value = listCategorySelectHelper.ToDataTable()
             };
             #endregion

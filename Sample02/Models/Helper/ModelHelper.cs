@@ -10,42 +10,31 @@ namespace Sample02.Models.Helper
 {
     public static class ModelHelper
     {
-        public static DataTable ToDataTable<T>(this List<T> list_T) where T:class
+        #region [- ToDataTable<T>(List<T> list_T) -]
+        public static DataTable ToDataTable<T>(this List<T> list_T) where T : class
         {
-            //DataTable dataTable = new DataTable(typeof(T).Name);
-            //PropertyInfo[] Props = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
-            //foreach (PropertyInfo prop in Props)
-            //{
-            //    var type = (prop.PropertyType.IsGenericType && prop.PropertyType.GetGenericTypeDefinition() == typeof(Nullable<>) ? Nullable.GetUnderlyingType(prop.PropertyType) : prop.PropertyType);
-            //    dataTable.Columns.Add(prop.Name, type);
-            //}
-            //foreach (T item in list_T)
-            //{
-            //    var values = new object[Props.Length];
-            //    for (int i = 0; i < Props.Length; i++)
-            //        values[i] = Props[i].GetValue(item, null);
-            //    dataTable.Rows.Add(values);
-            //}
-            //return dataTable;
 
-            PropertyDescriptorCollection props =
-        TypeDescriptor.GetProperties(typeof(T));
-            DataTable table = new DataTable();
-            for (int i = 0; i < props.Count; i++)
-            {
-                PropertyDescriptor prop = props[i];
-                table.Columns.Add(prop.Name, prop.PropertyType);
-            }
-            object[] values = new object[props.Count];
-            foreach (T item in list_T)
-            {
-                for (int i = 0; i < values.Length; i++)
+                list_T = list_T == null ? ((List<T>)Activator.CreateInstance(typeof(List<>).MakeGenericType(typeof(T)))) : list_T;
+                List<PropertyInfo> properties = ((T)Activator.CreateInstance(typeof(T))).GetType().GetProperties().Where(p => p.GetMethod.IsVirtual == false).ToList();
+                DataTable dataTable = new DataTable();
+                foreach (var item in properties)
                 {
-                    values[i] = props[i].GetValue(item);
+                    PropertyInfo property = item;
+                    dataTable.Columns.Add(property.Name, Nullable.GetUnderlyingType(property.PropertyType) ?? property.PropertyType);
                 }
-                table.Rows.Add(values);
-            }
-            return table;
+                object[] values = new object[properties.Count];
+                foreach (T item in list_T)
+                {
+                    for (int i = 0; i < values.Length; i++)
+                    {
+                        values[i] = properties[i].GetValue(item);
+                    }
+                    dataTable.Rows.Add(values);
+                }
+
+                return dataTable;
+
         }
+        #endregion
     }
-}
+    }

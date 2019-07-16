@@ -68,7 +68,7 @@
                                .PageSize(20)
                                .ServerOperation(false)
                                .Model(model => model.Id(p => p.Id))
-                               .Read(read => read.Action("FillGridBySP", "ProductCategory"))
+                               .Read(read => read.Action("FillGrid", "ProductCategory"))
                          )
         )
 

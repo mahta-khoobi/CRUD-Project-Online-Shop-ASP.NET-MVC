@@ -165,7 +165,7 @@ namespace Sample02.Models.Framework.Base
 
         #endregion
 
-                #region [-Dispose()-]
+        #region [-Dispose()-]
         public void Dispose()
         {
             Context.Dispose();
