@@ -1,6 +1,7 @@
 ﻿using Kendo.Mvc.Extensions;
 using Kendo.Mvc.UI;
 using Sample02.Models.DomainModels.DTO.EF;
+using Sample02.Models.Helper.SPHelper.Product;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,7 +37,7 @@ namespace Sample02.Controllers
         public JsonResult FillGrid([DataSourceRequest] DataSourceRequest request)
         {
 
-            IEnumerable<Models.DomainModels.DTO.EF.Product> q = Ref_ProductViewModel.FillGrid();
+            IEnumerable<ProductSelectHelper> q = Ref_ProductViewModel.FillGridBySP();
 
             return Json(q.ToDataSourceResult(request), JsonRequestBehavior.AllowGet);
 

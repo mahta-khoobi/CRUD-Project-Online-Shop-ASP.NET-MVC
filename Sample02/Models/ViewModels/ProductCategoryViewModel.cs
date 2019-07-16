@@ -112,7 +112,7 @@ namespace Sample02.Models.ViewModels
         public List<CategorySelectHelper> FillGridBySP()
         {
             return Ref_UnitOfWork.Ref_IUnitOfWork.SelectBySP(
-                CategorySPHelper.usp_ProductCategory_Select,
+                CategorySPHelper.usp_Category_Select,
                 null
 
                 );

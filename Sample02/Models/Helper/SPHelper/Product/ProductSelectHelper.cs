@@ -12,6 +12,7 @@ namespace Sample02.Models.Helper.SPHelper.Product
         public string ProductName { get; set; }
         public string ProductDescription { get; set; }
         public decimal UnitPrice { get; set; }
-        public int CategoryCode { get; set; }
+        public int Category_Ref { get; set; }
+        public string CategoryName { get; set; }
     }
 }

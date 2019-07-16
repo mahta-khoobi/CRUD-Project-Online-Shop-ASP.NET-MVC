@@ -47,9 +47,20 @@ namespace Sample02.Models.ViewModels
         #endregion
 
         #region [-FillGrid()-]
-        public dynamic FillGrid()
+        public List<Product> FillGrid()
         {
-            return Ref_ProductCrud.SelectAll();
+            return Ref_UnitOfWork.Ref_IUnitOfWork.Select();
+        }
+        #endregion
+
+        #region [-FillGridBySP()-]
+        public List<ProductSelectHelper> FillGridBySP()
+        {
+            return Ref_UnitOfWork.Ref_IUnitOfWork.SelectBySP(
+                ProductSPHelper.usp_Product_Select,
+                null
+
+                );
         }
         #endregion
 

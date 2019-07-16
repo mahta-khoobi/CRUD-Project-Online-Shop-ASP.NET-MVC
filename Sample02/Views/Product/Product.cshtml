@@ -94,7 +94,7 @@
     }
         <br />
         <div class="row kendoGrid">
-        @(Html.Kendo().Grid<Sample02.Models.DomainModels.DTO.EF.Product>()
+        @(Html.Kendo().Grid<Sample02.Models.Helper.SPHelper.Product.ProductSelectHelper>()
                            .Name("ProductGrid")
                            .Columns(columns =>
                            {
@@ -105,6 +105,7 @@
                                columns.Bound(p => p.ProductDescription).Title("توضیحات");
                                columns.Bound(p => p.UnitPrice).Title("قیمت");
                                columns.Bound(p => p.Category_Ref).Title("کد گروه کالا");
+                               columns.Bound(p => p.CategoryName).Title("نام گروه کالا");
 
 
 
