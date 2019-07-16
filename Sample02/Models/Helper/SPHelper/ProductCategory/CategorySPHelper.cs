@@ -11,6 +11,8 @@ namespace Sample02.Models.Helper.SPHelper.ProductCategory
         public const string usp_ProductCategory_Select = "[dbo].[usp_ProductCategory_Select]";
         public const string usp_Category_Insert = "[dbo].[usp_Category_Insert] @categoryInfo";
         public const string usp_Category_Update = "[dbo].[usp_Category_Update] @categoryInfoUpdate";
+        public const string usp_Category_Delete = "[dbo].[usp_Category_Delete] @id";
+
 
 
 
@@ -57,6 +59,30 @@ namespace Sample02.Models.Helper.SPHelper.ProductCategory
             object[] parameters =
                 {
                 categoryListParameter
+                };
+            #endregion
+
+            return parameters;
+        }
+        #endregion
+
+        #region [-SetDeleteParameters(int id)-]
+        public static object[] SetDeleteParameters(int id)
+        {
+            #region [-SqlParameter-]
+            SqlParameter categoryDeleteParameter = new SqlParameter()
+            {
+                ParameterName = "@id",
+                SqlDbType = System.Data.SqlDbType.Int,
+                Value = id
+            };
+            #endregion
+
+            #region [-parameters-]
+
+            object[] parameters =
+                {
+                categoryDeleteParameter
                 };
             #endregion
 

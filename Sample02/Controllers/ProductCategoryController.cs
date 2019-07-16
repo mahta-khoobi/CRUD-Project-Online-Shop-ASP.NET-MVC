@@ -69,7 +69,6 @@ namespace Sample02.Controllers
 
         #region [- Edit() -]
         [HttpPost]
- 
         public ActionResult Edit([Bind(Include = "Id,CategoryCode,CategoryName")] CategorySelectHelper productCategory)
         {
             List<CategorySelectHelper> listCategory = new List<CategorySelectHelper>();
@@ -90,7 +89,7 @@ namespace Sample02.Controllers
         {
             if (ModelState.IsValid)
             {
-                Ref_ProductCategoryViewModel.Delete(id);
+                Ref_ProductCategoryViewModel.DeleteBySP(id);
                 return RedirectToAction("ProductCategory");
             }
             else

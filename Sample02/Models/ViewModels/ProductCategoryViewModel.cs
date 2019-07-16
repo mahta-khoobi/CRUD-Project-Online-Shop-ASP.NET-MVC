@@ -81,6 +81,19 @@ namespace Sample02.Models.ViewModels
 
         #endregion
 
+        #region [-DeleteBySP(int id)-]
+        public void DeleteBySP(int id)
+        {
+
+            Ref_UnitOfWork.Ref_IUnitOfWork.CrudBySP(
+                CategorySPHelper.usp_Category_Delete,
+                CategorySPHelper.SetDeleteParameters(id)
+                );
+
+        }
+
+        #endregion
+
         #region [-GetRecord(int id)-]
         public Models.DomainModels.DTO.EF.ProductCategory GetRecord(int id)
         {
