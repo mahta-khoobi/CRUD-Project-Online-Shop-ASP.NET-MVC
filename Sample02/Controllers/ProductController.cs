@@ -46,12 +46,14 @@ namespace Sample02.Controllers
 
         #region [- Create() -]
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,ProductCode,ProductName,ProductDescription,UnitPrice,Category_Ref")] Product product)
+        public ActionResult Create([Bind(Include = "Id,ProductCode,ProductName,ProductDescription,UnitPrice,Category_Ref")] ProductSaveHelper product)
         {
+            List<ProductSaveHelper> listProductInfo = new List<ProductSaveHelper>();
+            listProductInfo.Add(product);
 
             if (ModelState.IsValid)
             {
-                Ref_ProductViewModel.Save(product);
+                Ref_ProductViewModel.SaveBySP(listProductInfo);
                 return RedirectToAction("FillGrid");
             }
 

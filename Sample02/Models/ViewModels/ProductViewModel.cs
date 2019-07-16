@@ -46,6 +46,16 @@ namespace Sample02.Models.ViewModels
         }
         #endregion
 
+        #region [-SaveBySP(List<ProductSaveHelper> listProductSaveHelper)-]
+        public void SaveBySP(List<ProductSaveHelper> listProductSaveHelper)
+        {
+            Ref_UnitOfWork.Ref_IUnitOfWork.CrudBySP(
+                ProductSPHelper.usp_Product_Insert,
+                ProductSPHelper.SetInsertParameters(listProductSaveHelper)
+                );
+        }
+        #endregion
+
         #region [-FillGrid()-]
         public List<Product> FillGrid()
         {
