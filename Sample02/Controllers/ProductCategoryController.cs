@@ -70,18 +70,17 @@ namespace Sample02.Controllers
         #region [- Edit() -]
         [HttpPost]
  
-        public ActionResult Edit([Bind(Include = "Id,CategoryCode,CategoryName")] ProductCategory productCategory)
+        public ActionResult Edit([Bind(Include = "Id,CategoryCode,CategoryName")] CategorySelectHelper productCategory)
         {
+            List<CategorySelectHelper> listCategory = new List<CategorySelectHelper>();
+            listCategory.Add(productCategory);
             if (ModelState.IsValid)
             {
-
-                Ref_ProductCategoryViewModel.Edit(productCategory);
+                // Ref_ProductCategoryViewModel.Edit(productCategory);
+                Ref_ProductCategoryViewModel.EditBySP(listCategory);
                 return RedirectToAction("ProductCategory");
             }
-            else
-            {
-                return View("ProductCategory");
-            }
+            else { return View("ProductCategory"); }
         }
         #endregion
 

@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLStoredProcedures", "SQLStoredProcedures", "{0FA5C1E2-3BC1-4BF2-AB67-A3853B7F7314}"
 	ProjectSection(SolutionItems) = preProject
 		usp_Category_Insert.sql = usp_Category_Insert.sql
+		usp_Category_Update.sql = usp_Category_Update.sql
 	EndProjectSection
 EndProject
 Global

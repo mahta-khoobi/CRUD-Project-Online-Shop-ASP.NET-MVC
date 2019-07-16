@@ -10,10 +10,12 @@ namespace Sample02.Models.Helper.SPHelper.ProductCategory
     {
         public const string usp_ProductCategory_Select = "[dbo].[usp_ProductCategory_Select]";
         public const string usp_Category_Insert = "[dbo].[usp_Category_Insert] @categoryInfo";
+        public const string usp_Category_Update = "[dbo].[usp_Category_Update] @categoryInfoUpdate";
 
 
-        #region [-SetInsertParameters(List<CategorySelectHelper> listCategorySelectHelper)-]
-        public static object[] SetInsertParameters(List<CategorySaveHelper> listCategorySelectHelper)
+
+        #region [-SetInsertParameters(List<CategorySaveHelper> listCategorySaveHelper))-]
+        public static object[] SetInsertParameters(List<CategorySaveHelper> listCategorySaveHelper)
         {
             #region [-SqlParameter-]
             SqlParameter categoryListParameter = new SqlParameter()
@@ -21,6 +23,31 @@ namespace Sample02.Models.Helper.SPHelper.ProductCategory
                 ParameterName = "@categoryInfo",
                 SqlDbType = System.Data.SqlDbType.Structured,
                 TypeName = "dbo.udt_CategoryInfo",
+                Value = listCategorySaveHelper.ToDataTable()
+            };
+            #endregion
+
+            #region [-parameters-]
+
+            object[] parameters =
+                {
+                categoryListParameter
+                };
+            #endregion
+
+            return parameters;
+        }
+        #endregion
+
+        #region [-SetUpdateParameters(List<CategorySelectHelper> listCategorySelectHelper)-]
+        public static object[] SetUpdateParameters(List<CategorySelectHelper> listCategorySelectHelper)
+        {
+            #region [-SqlParameter-]
+            SqlParameter categoryListParameter = new SqlParameter()
+            {
+                ParameterName = "@categoryInfoUpdate",
+                SqlDbType = System.Data.SqlDbType.Structured,
+                TypeName = "dbo.udt_CategoryInfoUpdate",
                 Value = listCategorySelectHelper.ToDataTable()
             };
             #endregion
@@ -34,7 +61,7 @@ namespace Sample02.Models.Helper.SPHelper.ProductCategory
             #endregion
 
             return parameters;
-        } 
+        }
         #endregion
     }
 }

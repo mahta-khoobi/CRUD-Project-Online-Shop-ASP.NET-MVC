@@ -57,6 +57,19 @@ namespace Sample02.Models.ViewModels
         }
         #endregion
 
+        #region [- EditBySP(List<CategorySelectHelper> listCategorySelectHelper) -]
+        public void EditBySP(List<CategorySelectHelper> listCategorySelectHelper)
+        {
+
+            Ref_UnitOfWork.Ref_IUnitOfWork.CrudBySP(
+                CategorySPHelper.usp_Category_Update,
+                CategorySPHelper.SetUpdateParameters(listCategorySelectHelper)
+                );
+
+
+        }
+        #endregion
+
         #region [-Delete(int id)-]
         public void Delete(int id)
         {
