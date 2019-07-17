@@ -52,11 +52,15 @@ namespace Sample02.Models.ViewModels
         }
         #endregion
 
-        #region [-Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, List<Models.DomainModels.DTO.EF.OrderDetails> orderDetails)-]
-        public void Save(Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster, List<Models.DomainModels.DTO.Helper.OrderHelper> orderDetails)
+        #region [-SaveBySP()-]
+        public void SaveBySP(List<OrderMasterListSaveHelper> ref_OrderMasterList, List<OrderDetailsListSaveHelper> ref_OrderDetailsList)
         {
-           
-            Ref_OrderCrud.Insert(ref_OrderMaster, orderDetails);
+            Ref_UnitOfWork.Ref_IUnitOfWork.CrudBySP(
+                OrderSPHelper.usp_Order_Insert,
+                OrderSPHelper.SetInsertParameters(ref_OrderMasterList,ref_OrderDetailsList)
+                
+                );
+
         }
         #endregion
 
