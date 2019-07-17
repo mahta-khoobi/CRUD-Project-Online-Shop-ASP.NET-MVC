@@ -36,9 +36,19 @@ namespace Sample02.Models.ViewModels
         #endregion
 
         #region [-FillGrid()-]
-        public dynamic FillGrid()
+        public List<OrderMaster> FillGrid()
         {
-            return Ref_OrderCrud.SelectAll();
+           return Ref_UnitOfWork.Ref_IUnitOfWork.Select();
+        }
+        #endregion
+
+        #region [-FillGridBySP()-]
+        public List<OrderSelectHelper> FillGridBySP()
+        {
+            return Ref_UnitOfWork.Ref_IUnitOfWork.SelectBySP(
+                OrderSPHelper.usp_Order_Select,
+                null
+                );
         }
         #endregion
 
