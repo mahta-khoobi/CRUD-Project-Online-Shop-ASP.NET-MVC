@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 
@@ -13,15 +14,24 @@ namespace Sample02.Models.Helper.SPHelper.Order
 
 
         #region [-SetInsertParameters(List<ProductSaveHelper> listProductSaveHelper)-]
-        public static object[] SetInsertParameters(List<OrderMasterSaveHelper> listProductSaveHelper)
+        public static object[] SetInsertParameters(List<OrderMasterListSaveHelper> listOrderMaster, List<OrderDetailsListSaveHelper> listOrderDetails)
         {
             #region [-SqlParameter-]
-            SqlParameter productListParameter = new SqlParameter()
+            SqlParameter orderMasterListParameter = new SqlParameter()
             {
-                ParameterName = "@productInfo_Insert",
+                ParameterName = "@orderMasterList",
                 SqlDbType = System.Data.SqlDbType.Structured,
-                TypeName = "dbo.udt_ProductInfo_Insert",
-                Value = listProductSaveHelper.ToDataTable()
+                TypeName = "dbo.udt_OrderMasterList",
+                Value = listOrderMaster.ToDataTable()
+            };
+
+
+            SqlParameter orderDetailsListParameter = new SqlParameter()
+            {
+                ParameterName = "@orderDetailsList",
+                SqlDbType = System.Data.SqlDbType.Structured,
+                TypeName = "dbo.udt_OrderDetailsList",
+                Value = listOrderMaster.ToDataTable()
             };
             #endregion
 
@@ -29,7 +39,7 @@ namespace Sample02.Models.Helper.SPHelper.Order
 
             object[] parameters =
                 {
-                productListParameter
+                orderMasterListParameter,orderDetailsListParameter
                 };
             #endregion
 
