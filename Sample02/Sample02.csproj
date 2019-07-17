@@ -261,6 +261,8 @@
     <Compile Include="Models\Framework\Base\BaseRepository.cs" />
     <Compile Include="Models\Framework\Base\UnitOfWork.cs" />
     <Compile Include="Models\Helper\ModelHelper.cs" />
+    <Compile Include="Models\Helper\SPHelper\Order\OrderDetailsListSaveHelper.cs" />
+    <Compile Include="Models\Helper\SPHelper\Order\OrderMasterListSaveHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\Order\OrderSelectHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\Order\OrderSPHelper.cs" />
     <Compile Include="Models\Helper\SPHelper\ProductCategory\CategorySaveHelper.cs" />
