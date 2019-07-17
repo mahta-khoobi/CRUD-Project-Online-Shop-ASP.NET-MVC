@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Sample02.Models.DomainModels.DTO.EF;
+using Sample02.Models.Helper.SPHelper.Order;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -13,11 +15,13 @@ namespace Sample02.Models.ViewModels
         {
             Ref_OrderCrud = new DomainModels.POCO.OrderCrud();
             OrderDetail_Ref = new DomainModels.DTO.Helper.OrderHelper();
+            Ref_UnitOfWork = new Framework.Base.UnitOfWork<OnlineShopEntities, OrderMaster, int, OrderSelectHelper>(new Models.DomainModels.POCO.OrderRepository(new OnlineShopEntities()));
         }
         #endregion
 
         #region [-props for class-]
         public Models.DomainModels.POCO.OrderCrud Ref_OrderCrud { get; set; }
+        public Models.Framework.Base.UnitOfWork<OnlineShopEntities, OrderMaster, int, OrderSelectHelper> Ref_UnitOfWork { get; set; }
 
         #endregion
 
