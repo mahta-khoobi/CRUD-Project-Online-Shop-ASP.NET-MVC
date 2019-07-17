@@ -63,18 +63,13 @@ namespace Sample02.Controllers
         #region [- Create() -]
 
         [HttpPost]
-        public JsonResult Create([Bind(Include = "Id,OrderCode,OrderDate,Customer_Ref,OrderDetails,OrderDetail_Ref,Ref_OrderCrud")] Sample02.Models.ViewModels.OrderViewModel ref_OrderViewModel)
+        public JsonResult Create([Bind(Include = "OrderMasterList,OrderDetailsList")] Sample02.Models.ViewModels.OrderViewModel ref_OrderViewModel)
         {
-
+            Ref_OrderViewModel.OrderMasterList = new List<OrderMasterListSaveHelper>();
+            Ref_OrderViewModel.OrderMasterList = ref_OrderViewModel.OrderMasterList;
             bool status = false;
-            Models.DomainModels.DTO.EF.OrderMaster ref_OrderMaster = new Models.DomainModels.DTO.EF.OrderMaster();
-            ref_OrderMaster.OrderCode = ref_OrderViewModel.OrderCode;
-            ref_OrderMaster.OrderDate = ref_OrderViewModel.OrderDate;
-            ref_OrderMaster.Customer_Ref = ref_OrderViewModel.Customer_Ref;
-
-
-
-            Ref_OrderViewModel.Save(ref_OrderMaster, ref_OrderViewModel.OrderDetails);
+            
+            Ref_OrderViewModel.SaveBySP(Ref_OrderViewModel.OrderMasterList, ref_OrderViewModel.OrderDetailsList);
             status = true;
 
 

@@ -202,12 +202,12 @@
     };
 
     var selectedCustomer_RefID = 0;
-    var orderMaster = [];
-    var orderDetails = [];
+    var OrderMasterList = [];
+    var OrderDetailsList = [];
 
     $("#btnAdd").click(function () {
 
-        orderDetails.push({
+        OrderDetailsList.push({
             UnitPrice: parseFloat($('#unitPrice').val().trim()),
             Discount: parseFloat($('#discount').val().trim()),
             TaxRate: parseFloat($('#taxRate').val().trim()),
@@ -224,7 +224,7 @@
     //************** Save **************
     $("#btnSave").click(function () {
 
-        orderMaster.push({
+        OrderMasterList.push({
             OrderCode: parseInt($('#code').val()),
 
             OrderDate: $('#date').val(),
@@ -234,8 +234,8 @@
         });
 
         var data = {
-            OrderMaster: orderMaster,
-            OrderDetails: orderDetails
+            OrderMasterList: OrderMasterList,
+            OrderDetailsList: OrderDetailsList
         }
 
 
@@ -251,8 +251,8 @@
                 if (d.status == true) {
 
                     alert('Successfully done.');
-                    orderMaster = [];
-                    orderDetails = [];
+                    OrderMasterList = [];
+                    OrderDetailsList = [];
                     ClearOrderInfoFields();
                     location.reload();
 

@@ -32,7 +32,8 @@ namespace Sample02.Models.ViewModels
         public int Customer_Ref { get; set; }
 
         public Models.DomainModels.DTO.Helper.OrderHelper OrderDetail_Ref { get; set; }
-        public List<Models.DomainModels.DTO.Helper.OrderHelper> OrderDetails { get; set; }
+        public List<Models.Helper.SPHelper.Order.OrderMasterListSaveHelper> OrderMasterList { get; set; }
+        public List<Models.Helper.SPHelper.Order.OrderDetailsListSaveHelper> OrderDetailsList { get; set; }
         #endregion
 
         #region [-FillGrid()-]
