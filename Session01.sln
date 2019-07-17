@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQLStoredProcedures", "SQLS
 		usp_Category_Insert.sql = usp_Category_Insert.sql
 		usp_Category_Select.sql = usp_Category_Select.sql
 		usp_Category_Update.sql = usp_Category_Update.sql
+		usp_Order_Select.sql = usp_Order_Select.sql
 		usp_Product_Delete.sql = usp_Product_Delete.sql
 		usp_Product_Insert.sql = usp_Product_Insert.sql
 		usp_Product_Select.sql = usp_Product_Select.sql

@@ -12,7 +12,7 @@ namespace Sample02.Models.ViewModels
         #region [-ctor-]
         public ProductViewModel()
         {
-            Ref_ProductCrud = new DomainModels.POCO.ProductCrud();
+           // Ref_ProductCrud = new DomainModels.POCO.ProductCrud();
             Ref_ProductCategoryViewModel = new ProductCategoryViewModel();
             Ref_UnitOfWork = new Framework.Base.UnitOfWork<OnlineShopEntities, Product, int, ProductSelectHelper>(new Models.DomainModels.POCO.ProductRepository(new OnlineShopEntities()));
         }
@@ -20,7 +20,7 @@ namespace Sample02.Models.ViewModels
 
         #region [-props for class-]
 
-        public Models.DomainModels.POCO.ProductCrud Ref_ProductCrud { get; set; }
+        //public Models.DomainModels.POCO.ProductCrud Ref_ProductCrud { get; set; }
         public Models.ViewModels.ProductCategoryViewModel Ref_ProductCategoryViewModel { get; set; }
         public Framework.Base.UnitOfWork<OnlineShopEntities, Product, int, ProductSelectHelper> Ref_UnitOfWork { get; set; }
 
