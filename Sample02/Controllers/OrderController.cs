@@ -28,7 +28,7 @@ namespace Sample02.Controllers
         #region [-Order()-]
         public ActionResult Order()
         {
-            return View();
+            return View(Ref_OrderViewModel);
         }
         #endregion
 
@@ -65,11 +65,10 @@ namespace Sample02.Controllers
         [HttpPost]
         public JsonResult Create([Bind(Include = "OrderMasterList,OrderDetailsList")] Sample02.Models.ViewModels.OrderViewModel ref_OrderViewModel)
         {
-            Ref_OrderViewModel.OrderMasterList = new List<OrderMasterListSaveHelper>();
-            Ref_OrderViewModel.OrderMasterList = ref_OrderViewModel.OrderMasterList;
+            
             bool status = false;
             
-            Ref_OrderViewModel.SaveBySP(Ref_OrderViewModel.OrderMasterList, ref_OrderViewModel.OrderDetailsList);
+            Ref_OrderViewModel.SaveBySP(ref_OrderViewModel.OrderMasterList, ref_OrderViewModel.OrderDetailsList);
             status = true;
 
 

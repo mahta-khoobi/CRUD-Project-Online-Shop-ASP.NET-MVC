@@ -31,7 +31,7 @@ namespace Sample02.Models.Helper.SPHelper.Order
                 ParameterName = "@orderDetailsList",
                 SqlDbType = System.Data.SqlDbType.Structured,
                 TypeName = "dbo.udt_OrderDetailsList",
-                Value = listOrderMaster.ToDataTable()
+                Value = listOrderDetails.ToDataTable()
             };
             #endregion
 
