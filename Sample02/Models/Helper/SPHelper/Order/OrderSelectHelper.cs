@@ -13,7 +13,7 @@ namespace Sample02.Models.Helper.SPHelper.Order
         public System.DateTime OrderDate { get; set; }
         public int Customer_Ref { get; set; }
         public int CustomerCode { get; set; }
-        public string FistName { get; set; }
+        public string FirstName { get; set; }
         public string LastName { get; set; }
     }
 }
