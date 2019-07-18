@@ -11,9 +11,10 @@ namespace Sample02.Models.Helper.SPHelper.Order
        
         public const string usp_Order_Select = "[dbo].[usp_Order_Select]";
         public const string usp_Order_Insert = "[dbo].[usp_Order_Insert] @orderMasterList , @orderDetailsList";
+        public const string usp_Order_Delete = "[dbo].[usp_Order_Delete] @id";
 
 
-        #region [-SetInsertParameters(List<ProductSaveHelper> listProductSaveHelper)-]
+        #region [-SetInsertParameters(List<OrderMasterListSaveHelper> listOrderMaster, List<OrderDetailsListSaveHelper> listOrderDetails)-]
         public static object[] SetInsertParameters(List<OrderMasterListSaveHelper> listOrderMaster, List<OrderDetailsListSaveHelper> listOrderDetails)
         {
             #region [-SqlParameter-]
@@ -40,6 +41,30 @@ namespace Sample02.Models.Helper.SPHelper.Order
             object[] parameters =
                 {
                 orderMasterListParameter,orderDetailsListParameter
+                };
+            #endregion
+
+            return parameters;
+        }
+        #endregion
+
+        #region [-SetDeleteParameters(int id)-]
+        public static object[] SetDeleteParameters(int id)
+        {
+            #region [-SqlParameter-]
+            SqlParameter orderDeleteParameter = new SqlParameter()
+            {
+                ParameterName = "@id",
+                SqlDbType = System.Data.SqlDbType.Int,
+                Value = id
+            };
+            #endregion
+
+            #region [-parameters-]
+
+            object[] parameters =
+                {
+                orderDeleteParameter
                 };
             #endregion
 

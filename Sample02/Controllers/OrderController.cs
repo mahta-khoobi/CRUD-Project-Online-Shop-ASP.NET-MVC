@@ -51,7 +51,7 @@ namespace Sample02.Controllers
             if (id != null)
             {
                 // Ref_OrderViewModel.Id = id;
-               q = Ref_OrderViewModel.GetOrderDetailsGrid(id);
+            //   q = Ref_OrderViewModel.GetOrderDetailsGrid(id);
 
                 
             }
@@ -64,16 +64,15 @@ namespace Sample02.Controllers
 
         [HttpPost]
         public JsonResult Create([Bind(Include = "OrderMasterList,OrderDetailsList")] Sample02.Models.ViewModels.OrderViewModel ref_OrderViewModel)
-        {
-            
+        {     
             bool status = false;
-            
-            Ref_OrderViewModel.SaveBySP(ref_OrderViewModel.OrderMasterList, ref_OrderViewModel.OrderDetailsList);
-            status = true;
+            if (ModelState.IsValid)
+            {
 
+                Ref_OrderViewModel.SaveBySP(ref_OrderViewModel.OrderMasterList, ref_OrderViewModel.OrderDetailsList);
+                status = true;
 
-
-
+            }
             return new JsonResult { Data = new { status = status } };
         }
 
@@ -86,7 +85,7 @@ namespace Sample02.Controllers
         {
             if (ModelState.IsValid)
             {
-                Ref_OrderViewModel.Delete(id);
+                Ref_OrderViewModel.DeleteBySP(id);
                 return RedirectToAction("FillGrid");
             }
             else

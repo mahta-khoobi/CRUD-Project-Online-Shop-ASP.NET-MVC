@@ -13,14 +13,14 @@ namespace Sample02.Models.ViewModels
         #region [-ctor-]
         public OrderViewModel()
         {
-            Ref_OrderCrud = new DomainModels.POCO.OrderCrud();
+            //Ref_OrderCrud = new DomainModels.POCO.OrderCrud();
             OrderDetail_Ref = new DomainModels.DTO.Helper.OrderHelper();
             Ref_UnitOfWork = new Framework.Base.UnitOfWork<OnlineShopEntities, OrderMaster, int, OrderSelectHelper>(new Models.DomainModels.POCO.OrderRepository(new OnlineShopEntities()));
         }
         #endregion
 
         #region [-props for class-]
-        public Models.DomainModels.POCO.OrderCrud Ref_OrderCrud { get; set; }
+       // public Models.DomainModels.POCO.OrderCrud Ref_OrderCrud { get; set; }
         public Models.Framework.Base.UnitOfWork<OnlineShopEntities, OrderMaster, int, OrderSelectHelper> Ref_UnitOfWork { get; set; }
 
         #endregion
@@ -65,20 +65,23 @@ namespace Sample02.Models.ViewModels
         }
         #endregion
 
-        #region [-Delete(int id)-]
-        public void Delete(int id)
+        #region [-DeleteBySP(int id)-]
+        public void DeleteBySP(int id)
         {
             
-            Ref_OrderCrud.Remove(id);
+            Ref_UnitOfWork.Ref_IUnitOfWork.CrudBySP(
+                OrderSPHelper.usp_Order_Delete,
+                OrderSPHelper.SetDeleteParameters(id)
+                );
         }
         #endregion
 
         #region [-GetOrderDetailsGrid(int id)-]
-        public List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> GetOrderDetailsGrid(int? id)
-        {
+        //public List<Models.DomainModels.DTO.EF.usp_GetOrderDetailsGivenOrderMasterId_Result> GetOrderDetailsGrid(int? id)
+        //{
      
-            return Ref_OrderCrud.SelectOrderDetailsGivenOrdeMasterId(id);
-        }
+        //    return Ref_OrderCrud.SelectOrderDetailsGivenOrdeMasterId(id);
+        //}
         #endregion
 
     }
