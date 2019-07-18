@@ -252,7 +252,6 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DomainModels\DTO\Helper\OrderHelper.cs" />
-    <Compile Include="Models\DomainModels\POCO\OrderCrud.cs" />
     <Compile Include="Models\DomainModels\POCO\OrderRepository.cs" />
     <Compile Include="Models\DomainModels\POCO\ProductCategoryRepository.cs" />
     <Compile Include="Models\DomainModels\POCO\ProductRepository.cs" />

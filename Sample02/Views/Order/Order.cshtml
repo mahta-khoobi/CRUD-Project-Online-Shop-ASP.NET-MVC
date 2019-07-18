@@ -205,6 +205,8 @@
     var OrderMasterList = [];
     var OrderDetailsList = [];
 
+
+    //********AddToDetalisTable********
     $("#btnAdd").click(function () {
 
         OrderDetailsList.push({
@@ -220,6 +222,7 @@
         ClearOrderItemsFields();
 
     });
+    //**********************************
 
     //************** Save **************
     $("#btnSave").click(function () {
@@ -304,7 +307,16 @@
             });
         }
     });
-     //**********************************
+    //**********************************
+
+    //************** Refresh ***********
+    $("#btnRefresh").click(function () {
+
+        location.reload();
+    })
+    //**********************************
+
+
 
     function AddRowToOrderDetailsGrid() {
         var newRow = { UnitPrice: $("#unitPrice").val(), Discount: $("#discount").val(), TaxRate: $("#taxRate").val(), Quantity: $("#quantity").val(), Product_Ref: $("#product_ref").val() };
@@ -326,7 +338,7 @@
     }
 
 
-      function OnRowSelect (e) {
+    function OnRowSelect (e) {
         var grid = $("#OrderGrid").data("kendoGrid");
         var selectedRow = this.dataItem(this.select());
         $("#code").val(selectedRow.OrderCode);
@@ -334,101 +346,10 @@
         $("#customer_ref").val(selectedRow.Customer_Ref);
           ref_Order.Id = selectedRow.Id;
 
-          @*$('#OrderDetailsGrid').kendoGrid({
-              scrollable: true,
-              sortable: true,
-              pageable: true,
-              selectable: "row",
-              filterable: true
-              , columns:
-                  [
-                      { field: "Id", title: "Id" }
-                      , { field: "UnitPrice", title: "UnitPrice" }
-                      , { field: "Discount", title: "Discount" }
-                      , { field: "TaxRate", title: "TaxRate" }
-                      , { field: "Quantity", title: "Quantity" }
-                      , { field: "Product_Ref", title: "Product_Ref" }
-                      , { field: "OrderMaster_Ref", title: "OrderMaster_Ref" }
-                      , { field: "ProductCode", title: "ProductCode" }
-
-
-                  ], dataSource: {
-                      type: "ajax",
-                  transport: {
-                      read: {
-                          url: "@Url.Action("FillOrderDetailsGrid", "Order")",
-                          contentType: "application/json; charset=utf-8",
-                          type :"POST"
-                          
-                      },
-
-
-                      parameterMap: function (options, operation) {
-                          var output = null;
-                          if (operation == 'read') {
-                              output = '{ id ' + ref_Order.Id +  '}';
-                          }
-                          alert(output);
-                          return JSON.stringify(output);
-                      }
-
-
-                  },
-                  schema: {
-                      data: "Data",
-                      total: "Total"
-
-                  }
-                  }
-          });*@
-
-          //$.ajax(
-          //    {
-          //        type: 'POST',
-          //        url: '/Order/FillOrderDetailsGrid',
-          //        dataType: 'json',
-          //        data: { id: ref_Order.Id },
-          //        success: function (result) {
-          //            $("#OrderDetailsGrid").data("kendoGrid").dataSource.data(result);
-          //        }
-          //    });
-
-       
-
-
-        //$.ajax({
-
-        //    url: "/Order/FillOrderDetailsGrid",
-
-        //    type: "GET",
-
-        //    contentType: "application/json;charset=utf-8",
-
-        //    dataType: "json",
-
-        //    data: ref_Order.Id,
-
-        //    success: function (result) {
-
-        //       // $("#OrderDetailsGrid").data("kendoGrid").dataSource.data(result);
-        //        return result;
-
-        //    },
-
-        //    error: function (errormessage) {
-        //        return errormessage;
-
-
-        //    }
-
-        //});
-
-
-
-
- 
-
+         
     }
+
+
     //***
     //OnComboBoxSelect = function (e) {
     //    var comboBox = $('#customerList').data("kendoComboBox");
@@ -444,6 +365,7 @@
     //    selectedCustomer_RefID  = selectedValue;
     //    alert(selectedCustomer_RefID );
     //}
+
     function additionalInfo() {
  
 

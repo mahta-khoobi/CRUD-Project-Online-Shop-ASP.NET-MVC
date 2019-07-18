@@ -167,8 +167,10 @@
 
                     success: function (result) {
 
-                        //location.reload();
+                        
                         alert("Save is done!");
+                        location.reload();
+
 
                     },
 
@@ -215,6 +217,7 @@
                     success: function (result) {
 
                         alert("Update is done!");
+                        location.reload();
 
                     },
 
@@ -247,6 +250,7 @@
                     success: function (result) {
 
                         alert("Delete is done!");
+                        location.reload();
 
                     },
 
@@ -278,13 +282,16 @@
                 ref_Product.Id = selectedRow.Id;
             }
             //***
-    OnComboBoxSelect = function (e) {
+            //************** OnComboBoxSelect ******************
+            OnComboBoxSelect = function (e) {
         var comboBox = $('#CategoryComboBox').data("kendoComboBox");
         var selectedItem = this.dataItem(this.select());
         ref_Product.Category_Ref = selectedItem.Id;
     }
+            //************************************************
 
-    function SelectedValue(ddlObject) {
+             //************** SelectedValue ******************
+            function SelectedValue(ddlObject) {
    
         var selectedValue = ddlObject.value; 
         var selectedText = ddlObject.options[ddlObject.selectedIndex].innerHTML;
@@ -292,5 +299,6 @@
         selectedCategoryRefID = selectedValue;
         alert(selectedCategoryRefID);
     }  
+             //**********************************************
 </script>
 
