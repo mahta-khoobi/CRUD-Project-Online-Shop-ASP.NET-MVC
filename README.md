@@ -1,1 +1,1 @@
-// See Sample2 and different branches for the final development
+// See Sample2 and feature-1.02-SOLID&DI_WithStoredProcedure branch for the final development
